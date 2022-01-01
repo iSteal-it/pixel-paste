@@ -1,0 +1,138 @@
+.footer-padding {
+	padding-bottom: 60px;
+}
+
+.footer {
+	position: absolute;
+	text-align: center;
+	bottom: 0;
+	width: 100%;
+	height: 60px
+}
+.footer p {
+	margin-top: 25px;
+	font-size: 12px;
+  color: #000;
+}
+
+html {
+  min-height: 100%;
+  position: relative;
+}
+
+#dropdown {
+  position:absolute;
+  top:0;
+  right:0;
+	padding: 3%;
+}
+
+ul {
+	list-style: none;
+}
+.container {
+	margin-top: 7%;
+	padding-left: 5%;
+	padding-right:5%;
+}
+
+hr {
+ border-top:1px dotted #000;
+}
+
+li {
+	text-align: left;
+}
+
+input {
+	border: 3px solid;
+  border-radius: 3px;
+  border-color: #f9f9fb;
+}
+
+a {
+	text-decoration: none;
+
+}
+
+.ntooltip {
+  position: relative;
+  display: inline-block;
+
+}
+
+.ntooltip .ntooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+	top: -5px;
+  left: 150%;
+}
+
+.ntooltip:hover .ntooltiptext {
+  visibility: visible;
+}
+
+.ntooltip .ntooltiptext::after {
+  content: " ";
+  position: absolute;
+  top: 50%;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent black transparent transparent;
+}
+
+.mtooltip{
+  position: relative;
+  display: inline-block;
+}
+
+.mtooltip .mtooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+  position: absolute;
+  z-index: 1;
+	top: -5px;
+  right: 175%;
+}
+
+.mtooltip:hover .mtooltiptext {
+  visibility: visible;
+}
+.mtooltip .mtooltiptext::after {
+  content: " ";
+  position: absolute;
+  top: 15%;
+  left: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent transparent transparent black;
+}
+
+.ma {
+	color: white;
+}
+
+.postt {
+	white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.shareurl {
+	width:100%;
+	border:0px;
+}

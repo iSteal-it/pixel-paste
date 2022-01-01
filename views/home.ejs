@@ -1,0 +1,50 @@
+<%- include("partials/header") -%>
+
+<h1>PixelPaste Made For Writers</h1>
+<p>Pixelpaste is an online story writing platform designed for people who love to write and share.With pixelpaste you can easily write and publish your story online for the whole world to see. Its easy just write your story and publish then share the story with your family friends or collegues without any hassel.</p>
+
+<br>
+<h2> Featured Stories</h2>
+<br>
+<% if (posts.length <= 5) { %>
+  <% posts.forEach(function(post){%>
+    <h3><%=post.title%></h3>
+     <p>
+       <%=post.postCont.split(/\s+/).slice(0,100).join(" ") + " ..."%>
+    <a href="/stories/<%=post.title.replace(/\s/g, "-")%>" >Read More</a>&nbsp;&nbsp;&nbsp;&nbsp;
+       <a href="/<%=post._id%>">❌</a>&nbsp;&nbsp;&nbsp;&nbsp;
+       <a href="/compose/<%=post._id%>">✏️</a>
+     </p>
+  <%})%>
+<%} else {%>
+<% var leng = posts.length %>
+<% function no(leng) { %>
+  <% var randomNumber = Math.floor(Math.random() * leng); %>
+  <%return randomNumber %>
+<%} %>
+
+<% for (i=0;i<10;i++) { %>
+  <% var num = no(leng) %>
+  <h3>
+  <%= posts[num].title %>
+  </h3>
+  <p>
+    <%=posts[num].postCont.split(/\s+/).slice(0,100).join(" ") + " ..."%>
+    <a href="/stories/<%=posts[num].title.replace(/\s/g, "-")%>">Read More</a>&nbsp;&nbsp;
+    <a href="/<%=posts[num]._id%>">❌</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="/compose/<%=posts[num]._id%>">✏️</a>
+  </p>
+<%}%>
+  <%}%>
+
+  <div class="ntooltip" onclick="refreshPage()"><p><i class="fas fa-sync"></i></p>
+    <span class="ntooltiptext">load more</span>
+  </div>
+
+  <script>
+  function refreshPage(){
+      window.location.reload();
+  }
+
+  </script>
+<%- include("partials/footer") -%>

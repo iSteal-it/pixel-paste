@@ -1,0 +1,43 @@
+<%- include("partials/header"); -%>
+<% if (title.length <=0) { %>
+  <h2>Start Writing Your Epic Story Below</h2>
+  <br>
+<form action="" method="post">
+  <div class="form-group">
+    <label>Title</label>
+    <input type="text" class="form-control" name="title" required>
+    <label>Author</label>
+    <input type="text" class="form-control" name="author" required >
+    <label>Story</label>
+    <textarea name="story" class="form-control" style="height: 300px" required></textarea>
+    <br>
+    <button class="btn btn-primary form-control" type="submit" name="button">Publish</button>
+
+  </div>
+
+
+</form>
+
+<%} else {%>
+  <h2>Edit Your Epic Story</h2>
+  <br>
+  <form action="" method="post">
+    <div class="form-group">
+      <input type="hidden" value="<%=id%>">
+      <label>Title: </label>
+      <label><%=title%></label>
+      <br />
+      <label>Author: </label>
+      <label><%=author%></label>
+      <br />
+      <label>Story</label>
+      <textarea name="story" class="form-control" style="height: 300px" required><%=story%></textarea>
+      <br>
+      <button class="btn btn-primary form-control" type="submit" name="button">Publish</button>
+
+    </div>
+
+
+  </form>
+  <%}%>
+<%- include("partials/footer"); -%>
