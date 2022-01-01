@@ -25,11 +25,9 @@
     <div class="form-group">
       <input type="hidden" value="<%=id%>">
       <label>Title: </label>
-      <label><%=title%></label>
-      <br />
+      <input type="text" class="form-control" value="<%=title%>" name="title" required>
       <label>Author: </label>
-      <label><%=author%></label>
-      <br />
+      <input type="text" class="form-control" value="<%=author%>" name="author" required>
       <label>Story</label>
       <textarea name="story" class="form-control" style="height: 300px" required><%=story%></textarea>
       <br>

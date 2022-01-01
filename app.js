@@ -174,7 +174,7 @@ app.get("/compose/:id", function(req,res) {
 app.post("/compose/:id", function(req,res) {
   Post.findOneAndUpdate({
     _id: req.params.id.toString()
-  },{postCont: req.body.story.toString()},null, function(err, results) {
+  },{postCont: req.body.story.toString(),title:req.body.title.toString(),author:req.body.author.toString()},null, function(err, results) {
     if (err) {
       console.log(err)
     }
