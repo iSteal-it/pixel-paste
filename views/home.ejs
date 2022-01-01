@@ -11,7 +11,7 @@
     <h3><%=post.title%></h3>
      <p>
        <%=post.postCont.split(/\s+/).slice(0,100).join(" ") + " ..."%>
-    <a href="/stories/<%=post.title.replace(/\s/g, "-")%>" >Read More</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="/stories/<%=post.url.replace(/\s/g, "-")%>" >Read More</a>&nbsp;&nbsp;&nbsp;&nbsp;
        <a href="/<%=post._id%>">❌</a>&nbsp;&nbsp;&nbsp;&nbsp;
        <a href="/compose/<%=post._id%>">✏️</a>
      </p>
@@ -30,7 +30,7 @@
   </h3>
   <p>
     <%=posts[num].postCont.split(/\s+/).slice(0,100).join(" ") + " ..."%>
-    <a href="/stories/<%=posts[num].title.replace(/\s/g, "-")%>">Read More</a>&nbsp;&nbsp;
+    <a href="/stories/<%=posts[num].url.replace(/\s/g, "-")%>">Read More</a>&nbsp;&nbsp;
     <a href="/<%=posts[num]._id%>">❌</a>&nbsp;&nbsp;&nbsp;&nbsp;
     <a href="/compose/<%=posts[num]._id%>">✏️</a>
   </p>

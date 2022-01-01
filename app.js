@@ -6,7 +6,7 @@ const mongoose = require("mongoose");
 const rewrite = require("express-urlrewrite")
 
 // connection to mongodb using mongoose
-mongoose.connect("mongodb://localhost:27017/pixel-paste", {
+mongoose.connect("mongodb://localhost:27017/pixelpaste", {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
@@ -25,6 +25,10 @@ app.use(express.static("public"));
 
 // creating collection
 const postSchema = new mongoose.Schema({
+  url: {
+    type:String,
+    required:true
+  },
   title: {
     type: String,
     required: true
@@ -68,7 +72,7 @@ app.get("/privacy-policy", function(req, res) {
 app.get("/stories/:title", function(req, res) {
   const titles = _.lowerCase(req.params.title)
   Post.find({
-    title: titles
+    url: titles
   }, function(err, results) {
     if (err) {
       console.log(err)
@@ -100,31 +104,33 @@ app.get("/compose", function(req, res) {
 app.post("/compose", function(req, res) {
   const titleH = _.lowerCase(req.body.title)
   Post.find({
-    title:titleH
+    url:titleH
   }, function(err , results){
     if (err) {
       console.log(err)
     } else if (results.length > 0) {
-      var rnd = Math.floor(Math.random() * 100);
-      var addTitle = titleH + " " + rnd
+      var rnd = Math.floor(Math.random() * 1000);
+      var addUrl = titleH + " " + rnd
       const story = {
-        title: addTitle.toString(),
+        url:addUrl.toString(),
+        title: req.body.title.toString(),
         author: req.body.author.toString(),
         postCont: req.body.story.toString()
       };
       var add = new Post(story);
       add.save()
-      res.redirect("/stories/" + addTitle.replace(/\s/g, "-"))
+      res.redirect("/stories/" + addUrl.replace(/\s/g, "-"))
     } else {
-      var addTitle = _.lowerCase(req.body.title)
+      var addUrl = _.lowerCase(req.body.title)
       const story = {
-        title: addTitle.toString(),
+        url:addUrl.toString(),
+        title: req.body.title.toString(),
         author: req.body.author.toString(),
         postCont: req.body.story.toString()
       };
       var add = new Post(story);
       add.save()
-      res.redirect("/stories/" + addTitle.replace(/\s/g, "-"))
+      res.redirect("/stories/" + addUrl.replace(/\s/g, "-"))
     }
   })
 });
@@ -179,7 +185,7 @@ app.post("/compose/:id", function(req,res) {
     if (err) {
       console.log(err)
     } else {
-      res.redirect("/stories/" + results[0]["title"].replace(/\s/g, "-"))
+      res.redirect("/stories/" + results[0]["url"].replace(/\s/g, "-"))
     }
   })
 })
