@@ -3,14 +3,9 @@ const bodyParser = require("body-parser");
 const _ = require("lodash");
 const ejs = require("ejs");
 const mongoose = require("mongoose");
-const rewrite = require("express-urlrewrite")
-
-// connection to mongodb using mongoose
-mongoose.connect("mongodb://localhost:27017/pixelpaste", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-});
-mongoose.set('useFindAndModify', false);
+const session = require("express-session");
+const passport = require("passport");
+const passportLocalMongoose = require("passport-local-mongoose");
 
 
 // setting up app
@@ -20,7 +15,22 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 app.use(express.static("public"));
+app.use(session({
+  secret:"Our little secret.",
+  resave:false,
+  saveUninitialized:false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
 
+
+// connection to mongodb using mongoose
+mongoose.connect("mongodb://localhost:27017/pixelpaste", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+});
+mongoose.set('useFindAndModify', false);
+mongoose.set('useCreateIndex', true);
 
 
 // creating collection
@@ -41,9 +51,26 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true
   }
-})
-const Post = mongoose.model("Post", postSchema)
+});
+const Post = mongoose.model("Post", postSchema);
 
+
+const userSchema = new mongoose.Schema ({
+  email:String,
+  password:String
+});
+userSchema.plugin(passportLocalMongoose);
+const User = new mongoose.model("User",userSchema)
+
+passport.serializeUser(function(user, done) {
+  done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+  User.findById(id, function(err, user) {
+    done(err, user);
+  });
+});
 
 // routes
 app.get("/", function(req, res) {
@@ -67,7 +94,54 @@ app.get("/privacy-policy", function(req, res) {
   res.render("privacy-policy")
 });
 
+app.get("/register",function(req,res){
+  res.render("register")
+});
 
+app.get("/login",function(req,res){
+  res.render("login")
+});
+
+app.get("/dashboard",function(req,res){
+  if (req.isAuthenticated()){
+    res.render("dashboard")
+  } else {
+    res.redirect("/login")
+  }
+})
+
+app.post("/register",function(req,res){
+  User.register({username:req.body.email},req.body.password,function(err,user){
+    if (err) {
+      console.log(err)
+      console.log(500)
+      res.redirect("/register")
+    } else {
+      passport.authenticate("local")(req,res,function(){
+        res.redirect("/dashboard");
+      });
+    }
+  });
+});
+
+app.post("/login", function(req,res){
+  const user = new User({
+    username:req.body.username,
+    password:req.body.password
+  });
+
+  req.login(user,function(err){
+    if (err) {
+      console.log(err)
+    } else {
+      console.log(1)
+      passport.authenticate("local"),
+      (function(req,res){
+        res.redirect("/dashboard")
+      })
+    }
+  })
+})
 // load post
 app.get("/stories/:title", function(req, res) {
   const titles = _.lowerCase(req.params.title)
@@ -149,7 +223,7 @@ app.get("/:id", function(req,res) {
   }
   )
   res.redirect("/")
-})
+});
 
 
 // update post
@@ -169,7 +243,7 @@ app.get("/compose/:id", function(req,res) {
       })
     }
   })
-})
+});
 
 app.post("/compose/:id", function(req,res) {
   Post.findOneAndUpdate({
@@ -188,7 +262,8 @@ app.post("/compose/:id", function(req,res) {
       res.redirect("/stories/" + results[0]["url"].replace(/\s/g, "-"))
     }
   })
-})
+});
+
 
 // unknown urls
 app.get('*', function(req, res) {

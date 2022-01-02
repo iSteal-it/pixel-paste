@@ -8,12 +8,12 @@
 <br>
 <% if (posts.length <= 5) { %>
   <% posts.forEach(function(post){%>
-    <h3><%=post.title%></h3>
+      <a href="/stories/<%=post.url.replace(/\s/g, "-")%>" class="pc" ><h3><%=post.title%></h3>
      <p>
        <%=post.postCont.split(/\s+/).slice(0,100).join(" ") + " ..."%>
-    <a href="/stories/<%=post.url.replace(/\s/g, "-")%>" >Read More</a>&nbsp;&nbsp;&nbsp;&nbsp;
-       <a href="/<%=post._id%>">❌</a>&nbsp;&nbsp;&nbsp;&nbsp;
-       <a href="/compose/<%=post._id%>">✏️</a>
+  </a>&nbsp;&nbsp;&nbsp;&nbsp;
+       <a href="/<%=post._id%>"><i class="fas fa-trash-alt"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+       <a href="/compose/<%=post._id%>"><i class="fas fa-edit"></i></a>
      </p>
   <%})%>
 <%} else {%>
@@ -26,13 +26,13 @@
 <% for (i=0;i<10;i++) { %>
   <% var num = no(leng) %>
   <h3>
-  <%= posts[num].title %>
+  <a href="/stories/<%=posts[num].url.replace(/\s/g, "-")%>"><%= posts[num].title %>
   </h3>
   <p>
     <%=posts[num].postCont.split(/\s+/).slice(0,100).join(" ") + " ..."%>
-    <a href="/stories/<%=posts[num].url.replace(/\s/g, "-")%>">Read More</a>&nbsp;&nbsp;
-    <a href="/<%=posts[num]._id%>">❌</a>&nbsp;&nbsp;&nbsp;&nbsp;
-    <a href="/compose/<%=posts[num]._id%>">✏️</a>
+    </a>&nbsp;&nbsp;
+    <a href="/<%=posts[num]._id%>"><i class="fas fa-trash-alt"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="/compose/<%=posts[num]._id%>"><i class="fas fa-edit"></i></a>
   </p>
 <%}%>
   <%}%>
