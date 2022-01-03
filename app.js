@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
+const LocalStrategy = require('passport-local').Strategy
 
 
 // setting up app
@@ -62,15 +63,11 @@ const userSchema = new mongoose.Schema ({
 userSchema.plugin(passportLocalMongoose);
 const User = new mongoose.model("User",userSchema)
 
-passport.serializeUser(function(user, done) {
-  done(null, user.id);
-});
-
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
-    done(err, user);
-  });
-});
+passport.use(new LocalStrategy({
+    usernameField: 'email',
+  },User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 // routes
 app.get("/", function(req, res) {
@@ -88,6 +85,11 @@ app.get("/", function(req, res) {
 
 app.get("/contact-us", function(req, res) {
   res.render("contact")
+});
+
+app.get("/logout",function(req, res){
+  req.logout()
+  res.redirect("/login")
 });
 
 app.get("/privacy-policy", function(req, res) {
@@ -114,7 +116,6 @@ app.post("/register",function(req,res){
   User.register({username:req.body.email},req.body.password,function(err,user){
     if (err) {
       console.log(err)
-      console.log(500)
       res.redirect("/register")
     } else {
       passport.authenticate("local")(req,res,function(){
@@ -126,7 +127,7 @@ app.post("/register",function(req,res){
 
 app.post("/login", function(req,res){
   const user = new User({
-    username:req.body.username,
+    username:req.body.email,
     password:req.body.password
   });
 
@@ -134,14 +135,12 @@ app.post("/login", function(req,res){
     if (err) {
       console.log(err)
     } else {
-      console.log(1)
-      passport.authenticate("local"),
-      (function(req,res){
+      passport.authenticate("local")(req,res,function(){
         res.redirect("/dashboard")
-      })
+      });
     }
-  })
-})
+  });
+});
 // load post
 app.get("/stories/:title", function(req, res) {
   const titles = _.lowerCase(req.params.title)
@@ -234,7 +233,6 @@ app.get("/compose/:id", function(req,res) {
     if (err) {
       console.log(err)
     } else if (results.length > 0) {
-      console.log(results[0].title)
       res.render("compose", {
         title: results[0].title,
         story: results[0].postCont,
