@@ -4,10 +4,13 @@
   <br>
 <form action="" method="post">
   <div class="form-group">
+  <input type="hidden" name="feature" value="1">
     <label>Title</label>
     <input type="text" class="form-control" name="title" required>
-    <label>Author</label>
-    <input type="text" class="form-control" name="author" required >
+    <label>Author (Register To Get Unique Author Name)</label>
+    <fieldset disabled>
+    <input  class="form-control" name="author" value = "Anonymous" >
+    </fieldset>
     <label>Story</label>
     <textarea name="story" class="form-control" style="height: 300px" required></textarea>
     <br>

@@ -2,6 +2,9 @@
 <style>
 body {background-color: #d5fefd;
 background-image: linear-gradient(315deg, #d5fefd 0%, #fffcff 74%);}
+#error {
+  color:red;
+}
 </style>
 <div id="card">
    <div id="card-content">
@@ -11,6 +14,9 @@ background-image: linear-gradient(315deg, #d5fefd 0%, #fffcff 74%);}
        <div class="underline-title"></div>
      </div>
      <form method="post" class="form">
+       <label for="error" id="error" class="align-items-center d-flex justify-content-center" style="padding-top:13px">
+           <%=error%>
+         </label>
        <label for="user-email" style="padding-top:13px">
            &nbsp;Email
          </label>

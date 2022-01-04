@@ -51,6 +51,10 @@ const postSchema = new mongoose.Schema({
   author: {
     type: String,
     required: true
+  },
+  feature: {
+    type: Number,
+    required:true
   }
 });
 const Post = mongoose.model("Post", postSchema);
@@ -58,7 +62,11 @@ const Post = mongoose.model("Post", postSchema);
 
 const userSchema = new mongoose.Schema ({
   email:String,
-  password:String
+  password:String,
+  author:{
+    type:String,
+    unique:true
+  }
 });
 userSchema.plugin(passportLocalMongoose);
 const User = new mongoose.model("User",userSchema)
@@ -97,11 +105,23 @@ app.get("/privacy-policy", function(req, res) {
 });
 
 app.get("/register",function(req,res){
-  res.render("register")
+  res.render("register", {
+    error: ""
+  })
 });
 
 app.get("/login",function(req,res){
-  res.render("login")
+
+  if (req.get('referer') === "http://localhost:3000/login") {
+    res.render("login",{
+      error:"Invalid Email Or Password"
+    })
+  } else {
+    res.render("login", {
+      error:""
+    })
+  }
+
 });
 
 app.get("/dashboard",function(req,res){
@@ -110,22 +130,37 @@ app.get("/dashboard",function(req,res){
   } else {
     res.redirect("/login")
   }
-})
-
-app.post("/register",function(req,res){
-  User.register({username:req.body.email},req.body.password,function(err,user){
-    if (err) {
-      console.log(err)
-      res.redirect("/register")
-    } else {
-      passport.authenticate("local")(req,res,function(){
-        res.redirect("/dashboard");
-      });
-    }
-  });
 });
 
-app.post("/login", function(req,res){
+
+app.post("/register",function(req,res){
+  if (req.body.password != req.body.cpassword) {
+    res.render("register", {
+      error:"Password Don't Match"
+    })
+  } else {
+    User.register({username:req.body.email,author:req.body.author},req.body.password,function(err,user){
+      if (err) {
+        if (err.name == "UserExistsError") {
+          res.render("register", {
+            error:"Email Already Exist"
+          })
+        } else if (err.name == "MongoError") {
+          res.render("register", {
+            error:"Pick Different Author Name"
+          })
+        }
+      } else {
+        passport.authenticate("local")(req,res,function(){
+          res.redirect("/dashboard");
+        });
+      }
+    });
+  };
+});
+
+app.post("/login",function(req,res){
+
   const user = new User({
     username:req.body.email,
     password:req.body.password
@@ -134,13 +169,18 @@ app.post("/login", function(req,res){
   req.login(user,function(err){
     if (err) {
       console.log(err)
+      res.redirect("/login", {
+        error:"not ok"
+      })
     } else {
-      passport.authenticate("local")(req,res,function(){
+      passport.authenticate("local",{failureRedirect:'/login'})(req,res,function(){
         res.redirect("/dashboard")
       });
     }
   });
 });
+
+
 // load post
 app.get("/stories/:title", function(req, res) {
   const titles = _.lowerCase(req.params.title)
@@ -175,6 +215,11 @@ app.get("/compose", function(req, res) {
 });
 
 app.post("/compose", function(req, res) {
+  if (req.isAuthenticated()){
+    var Author = req.user.author
+  } else {
+    var Author = "Anonymous"
+  }
   const titleH = _.lowerCase(req.body.title)
   Post.find({
     url:titleH
@@ -187,19 +232,22 @@ app.post("/compose", function(req, res) {
       const story = {
         url:addUrl.toString(),
         title: req.body.title.toString(),
-        author: req.body.author.toString(),
-        postCont: req.body.story.toString()
+        author: Author,
+        postCont: req.body.story.toString(),
+        feature:req.body.feature
       };
       var add = new Post(story);
       add.save()
       res.redirect("/stories/" + addUrl.replace(/\s/g, "-"))
     } else {
       var addUrl = _.lowerCase(req.body.title)
+      console.log(req.body.author)
       const story = {
         url:addUrl.toString(),
         title: req.body.title.toString(),
-        author: req.body.author.toString(),
-        postCont: req.body.story.toString()
+        author: Author,
+        postCont: req.body.story.toString(),
+        feature:req.body.feature
       };
       var add = new Post(story);
       add.save()
@@ -246,7 +294,7 @@ app.get("/compose/:id", function(req,res) {
 app.post("/compose/:id", function(req,res) {
   Post.findOneAndUpdate({
     _id: req.params.id.toString()
-  },{postCont: req.body.story.toString(),title:req.body.title.toString(),author:req.body.author.toString()},null, function(err, results) {
+  },{postCont: req.body.story.toString(),title:req.body.title.toString()},null, function(err, results) {
     if (err) {
       console.log(err)
     }

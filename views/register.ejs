@@ -2,7 +2,10 @@
 <style>
 body {background-color: #d5fefd;
 background-image: linear-gradient(315deg, #d5fefd 0%, #fffcff 74%);}
-#card {height: 500px}
+#card {height: 600px}
+#error {
+  color:red;
+}
 </style>
 <div class="background">
 <div id="card" class="cards">
@@ -13,10 +16,18 @@ background-image: linear-gradient(315deg, #d5fefd 0%, #fffcff 74%);}
        <div class="underline-title"></div>
      </div>
      <form method="post" class="form">
+       <label for="error" id="error" class="align-items-center d-flex justify-content-center" style="padding-top:13px">
+           <%=error%>
+         </label>
        <label for="user-email" style="padding-top:13px">
            &nbsp;Email
          </label>
        <input id="user-email" class="form-content" type="email" name="email" autocomplete="on" required />
+       <div class="form-border"></div>
+       <label for="user-author" style="padding-top:13px">
+           &nbsp;Author
+         </label>
+       <input id="user-author" class="form-content" type="text" name="author" required />
        <div class="form-border"></div>
        <label for="user-password" style="padding-top:22px">&nbsp;Password
          </label>
