@@ -1,18 +1,30 @@
 <%- include("partials/header"); -%>
 <% if (title.length <=0) { %>
-  <h2>Start Writing Your Epic Story Below</h2>
-  <br>
+<h2>Start Writing Your Epic Story Below</h2>
+<br>
 <form action="" method="post">
   <div class="form-group">
-  <input type="hidden" name="feature" value="1">
     <label>Title</label>
     <input type="text" class="form-control" name="title" required>
+    <% if (login) {%>
+    <label>Author</label>
+    <fieldset disabled>
+      <input class="form-control" name="author" value="<%=author%>">
+    </fieldset>
+    <%} else {%>
     <label>Author (Register To Get Unique Author Name)</label>
     <fieldset disabled>
-    <input  class="form-control" name="author" value = "Anonymous" >
+      <input class="form-control" name="author" value="Anonymous">
     </fieldset>
+    <%}%>
     <label>Story</label>
     <textarea name="story" class="form-control" style="height: 300px" required></textarea>
+    <br />
+    <input class="form-check-input" type="checkbox" name = "features"id="flexCheckIndeterminate">
+<label class="form-check-label" for="flexCheckIndeterminate">
+  Feature
+</label>
+<br />
     <br>
     <button class="btn btn-primary form-control" type="submit" name="button">Publish</button>
 
@@ -22,23 +34,45 @@
 </form>
 
 <%} else {%>
-  <h2>Edit Your Epic Story</h2>
-  <br>
-  <form action="" method="post">
-    <div class="form-group">
-      <input type="hidden" value="<%=id%>">
-      <label>Title: </label>
-      <input type="text" class="form-control" value="<%=title%>" name="title" required>
-      <label>Author: </label>
-      <input type="text" class="form-control" value="<%=author%>" name="author" required>
-      <label>Story</label>
-      <textarea name="story" class="form-control" style="height: 300px" required><%=story%></textarea>
-      <br>
-      <button class="btn btn-primary form-control" type="submit" name="button">Publish</button>
+    <h2>Edit Your Epic Story</h2>
+    <br>
+    <form action="" method="post">
+      <div class="form-group">
+        <input type="hidden" value="<%=id%>">
+        <label>Title: </label>
+        <input type="text" class="form-control" value="<%=title%>" name="title" required>
+        <% if (login) {%>
+        <label>Author</label>
+        <fieldset disabled>
+          <input class="form-control" name="author" value="<%=author%>">
+        </fieldset>
+        <%} else {%>
+        <label>Author (Register To Get Unique Author Name)</label>
+        <fieldset disabled>
+          <input class="form-control" name="author" value="Anonymous">
+        </fieldset>
+        <%}%>
+        <label>Story</label>
+        <textarea name="story" class="form-control" style="height: 300px" required><%=story%></textarea>
+        <br>
+        <%if (feature == 0) {%>
+          <input class="form-check-input" type="checkbox" name="features" id="flexCheckIndeterminate">
+          <label class="form-check-label" for="flexCheckIndeterminate">
+            Feature
+          </label>
+        <%} else {%>
+        <input class="form-check-input" type="checkbox" name="features" id="flexCheckIndeterminate" checked>
+        <label class="form-check-label" for="flexCheckIndeterminate">
+          Feature
+        </label>
+        <%}%>
+        <br>
+        <br />
+        <button class="btn btn-primary form-control" type="submit" name="button">Publish</button>
 
-    </div>
+      </div>
 
 
-  </form>
-  <%}%>
+    </form>
+    <%}%>
 <%- include("partials/footer"); -%>

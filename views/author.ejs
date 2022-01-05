@@ -1,0 +1,17 @@
+<%- include("partials/header") -%>
+<h2>Your Stories Given Below</h2>
+<br />
+
+<% if (posts.length <= 10) { %>
+  <% posts.forEach(function(post){%>
+      <a href="/stories/<%=post.url.replace(/\s/g, "-")%>" class="pc" ><h3><%=post.title%></h3>
+     <p>
+       <%=post.postCont.split(/\s+/).slice(0,100).join(" ") + " ..."%>
+  </a>&nbsp;&nbsp;&nbsp;&nbsp;
+       <a href="/<%=post._id%>"><i class="fas fa-trash-alt"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+       <a href="/compose/<%=post._id%>"><i class="fas fa-edit"></i></a>
+     </p>
+  <%})%>
+<%} %>
+
+<%- include("partials/footer") -%>

@@ -60,40 +60,7 @@ a:hover {
 	color:black;
 }
 
-.ntooltip {
-  position: relative;
-  display: inline-block;
 
-}
-
-.ntooltip .ntooltiptext {
-  visibility: hidden;
-  width: 120px;
-  background-color: black;
-  color: #fff;
-  text-align: center;
-  padding: 5px 0;
-  border-radius: 6px;
-  position: absolute;
-  z-index: 1;
-	top: -5px;
-  left: 150%;
-}
-
-.ntooltip:hover .ntooltiptext {
-  visibility: visible;
-}
-
-.ntooltip .ntooltiptext::after {
-  content: " ";
-  position: absolute;
-  top: 50%;
-  right: 100%;
-  margin-top: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent black transparent transparent;
-}
 
 .mtooltip{
   position: relative;
@@ -242,4 +209,12 @@ input {
 }
 textarea {
 	background-image: radial-gradient( circle farthest-corner at 10% 20%,  rgba(234,249,249,0.67) 0.1%, rgba(239,249,251,0.63) 90.1% );
+}
+
+#flexCheckIndeterminate {
+	border-color:#CCC;
+	outline:0;
+	-webkit-box-shadow:none;
+	box-shadow:none;
+	background-color: #333;
 }

@@ -76,10 +76,13 @@ passport.use(new LocalStrategy({
   },User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-
+app.use(function (req, res, next) {
+res.locals.login = req.user;
+next();
+})
 // routes
 app.get("/", function(req, res) {
-  Post.find(function(err, results) {
+  Post.find({feature:1},function(err, results) {
     if (err) {
       console.log(err)
     } else {
@@ -117,16 +120,22 @@ app.get("/login",function(req,res){
       error:"Invalid Email Or Password"
     })
   } else {
-    res.render("login", {
+    res.render('login',{
       error:""
     })
   }
 
 });
 
-app.get("/dashboard",function(req,res){
+app.get("/author",function(req,res){
   if (req.isAuthenticated()){
-    res.render("dashboard")
+    Post.find({author:req.user.author}, function(err,results){
+      if (err) {
+        console.log(err)
+      } else {
+        res.render("author", {posts:results})
+      }
+    })
   } else {
     res.redirect("/login")
   }
@@ -152,7 +161,7 @@ app.post("/register",function(req,res){
         }
       } else {
         passport.authenticate("local")(req,res,function(){
-          res.redirect("/dashboard");
+          res.redirect("/author");
         });
       }
     });
@@ -174,7 +183,7 @@ app.post("/login",function(req,res){
       })
     } else {
       passport.authenticate("local",{failureRedirect:'/login'})(req,res,function(){
-        res.redirect("/dashboard")
+        res.redirect("/author")
       });
     }
   });
@@ -207,14 +216,28 @@ app.get("/stories/:title", function(req, res) {
 
 // compose post
 app.get("/compose", function(req, res) {
-  res.render("compose", {
-    title: "",
-    story: "",
-    author: ""
-  })
+
+  if (req.user) {
+    res.render("compose", {
+      title: "",
+      story: "",
+      author: req.user.author
+    })
+  } else {
+    res.render("compose", {
+      title: "",
+      story: "",
+      author: ""
+    })
+  }
 });
 
 app.post("/compose", function(req, res) {
+  if (req.body.features === undefined) {
+    var feature = 0;
+  } else {
+    var feature = 1;
+  }
   if (req.isAuthenticated()){
     var Author = req.user.author
   } else {
@@ -234,20 +257,19 @@ app.post("/compose", function(req, res) {
         title: req.body.title.toString(),
         author: Author,
         postCont: req.body.story.toString(),
-        feature:req.body.feature
+        feature:feature
       };
       var add = new Post(story);
       add.save()
       res.redirect("/stories/" + addUrl.replace(/\s/g, "-"))
     } else {
       var addUrl = _.lowerCase(req.body.title)
-      console.log(req.body.author)
       const story = {
         url:addUrl.toString(),
         title: req.body.title.toString(),
         author: Author,
         postCont: req.body.story.toString(),
-        feature:req.body.feature
+        feature:feature
       };
       var add = new Post(story);
       add.save()
@@ -269,7 +291,7 @@ app.get("/:id", function(req,res) {
     }
   }
   )
-  res.redirect("/")
+  res.redirect("/author")
 });
 
 
@@ -285,16 +307,22 @@ app.get("/compose/:id", function(req,res) {
         title: results[0].title,
         story: results[0].postCont,
         author: results[0].author,
-        id:results[0]._id
+        id:results[0]._id,
+        feature:results[0].feature
       })
     }
   })
 });
 
 app.post("/compose/:id", function(req,res) {
+  if (req.body.features === undefined) {
+    var feature = 0;
+  } else {
+    var feature = 1;
+  }
   Post.findOneAndUpdate({
     _id: req.params.id.toString()
-  },{postCont: req.body.story.toString(),title:req.body.title.toString()},null, function(err, results) {
+  },{postCont: req.body.story.toString(),title:req.body.title.toString(),feature:feature},null, function(err, results) {
     if (err) {
       console.log(err)
     }
