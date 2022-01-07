@@ -6,7 +6,6 @@
 <br>
 <h2> Featured Stories</h2>
 <br>
-<% if (posts.length <= 10) { %>
   <% posts.forEach(function(post){%>
       <a href="/stories/<%=post.url.replace(/\s/g, "-")%>" class="pc" ><h3><%=post.title%></h3>
      <p>
@@ -14,33 +13,33 @@
   </a>&nbsp;&nbsp;&nbsp;&nbsp;
      </p>
   <%})%>
-<%} else {%>
-<% var leng = posts.length %>
-<% function no(leng) { %>
-  <% var randomNumber = Math.floor(Math.random() * leng); %>
-  <%return randomNumber %>
-<%} %>
 
-<% for (i=0;i<10;i++) { %>
-  <% var num = no(leng) %>
-  <h3>
-  <a href="/stories/<%=posts[num].url.replace(/\s/g, "-")%>"><%= posts[num].title %>
-  </h3>
-  <p>
-    <%=posts[num].postCont.split(/\s+/).slice(0,100).join(" ") + " ..."%>
-    </a>&nbsp;&nbsp;
-  </p>
-<%}%>
-  <%}%>
+<script type="text/javascript">
 
-  <div class="ntooltip" onclick="refreshPage()"><p><i class="fas fa-sync"></i></p>
-    <span class="ntooltiptext">load more</span>
-  </div>
+var page = 2
 
-  <script>
-  function refreshPage(){
-      window.location.reload();
+function getData(){
+  var ajax = new XMLHttpRequest();
+
+  ajax.open("POST","http://localhost:3000/?page="+ page.toString(),true);
+
+  ajax.onreadystatechange = function() {
+    if (this.readyState == 4) {
+      if (this.status == 200) {
+        var data = JSON.parse(this.responseText);
+        data.forEach(function(post){
+          
+        })
+      }
+    }
   }
-
-  </script>
+  var formData = new FormData();
+  ajax.send(formData)
+}
+window.onscroll = function(ev) {
+  if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
+      getData()
+  }
+};
+</script>
 <%- include("partials/footer") -%>

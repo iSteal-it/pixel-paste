@@ -7,6 +7,7 @@ const session = require("express-session");
 const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const LocalStrategy = require('passport-local').Strategy
+const pagination = require('express-mongoose-pagination')
 
 
 // setting up app
@@ -57,6 +58,8 @@ const postSchema = new mongoose.Schema({
     required:true
   }
 });
+
+postSchema.plugin(pagination)
 const Post = mongoose.model("Post", postSchema);
 
 
@@ -80,18 +83,18 @@ app.use(function (req, res, next) {
 res.locals.login = req.user;
 next();
 })
-// routes
-app.get("/", function(req, res) {
-  Post.find({feature:1},function(err, results) {
-    if (err) {
-      console.log(err)
-    } else {
-      res.render("home", {
-        posts: results
-      });
 
-    }
-  })
+
+// routes
+app.get("/",async function(req, res) {
+  const p = await Post.find({feature:1}).paginate(req)
+  res.render("home",{posts:p["data"],currentPage:p["currentPage"],lastpage:p["lastPage"]})
+});
+
+app.post("/",async function(req, res) {
+  const p = await Post.find({feature:1}).paginate(req)
+  var posts = p["data"]
+  res.json(posts)
 });
 
 app.get("/contact-us", function(req, res) {
@@ -127,15 +130,11 @@ app.get("/login",function(req,res){
 
 });
 
-app.get("/author",function(req,res){
+app.get("/author",async function(req,res){
   if (req.isAuthenticated()){
-    Post.find({author:req.user.author}, function(err,results){
-      if (err) {
-        console.log(err)
-      } else {
-        res.render("author", {posts:results})
-      }
-    })
+    const p = await Post.find({ author: req.user.author }).paginate(req)
+    console.log(p)
+    res.render("author",{posts:p["data"],currentPage:p["currentPage"],lastpage:p["lastPage"]})
   } else {
     res.redirect("/login")
   }
