@@ -1,15 +1,52 @@
 <%- include("partials/header") -%>
 <h2>Your Stories Given Below</h2>
 <br />
-
+<div class="postWall">
 <% posts.forEach(function(post){%>
-     <a href="/stories/<%=post.url.replace(/\s/g, "-")%>" class="pc" ><h3><%=post.title%></h3>
+     <a href="/stories/<%=post.url.replace(/\s/g, "-")%>"><h3><%=post.title%></h3>
     <p>
       <%=post.postCont.split(/\s+/).slice(0,100).join(" ") + " ..."%>
  </a>&nbsp;&nbsp;&nbsp;&nbsp;
-      <a href="/<%=post._id%>"><i class="fas fa-trash-alt"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
-      <a href="/compose/<%=post._id%>"><i class="fas fa-edit"></i></a>
+      <a href="/<%=post._id%>"><i class="icn fas fa-trash-alt"></i></a>&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="/compose/<%=post._id%>"><i class="icn fas fa-edit"></i></a>
     </p>
  <%})%>
+</div>
+ <script type="text/javascript">
 
+ var page = 2;
+
+ window.onscroll = function(ev) {
+
+   if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
+       getData();
+       page++;
+       console.log(page)
+   }
+ };
+
+ function getData(){
+   var ajax = new XMLHttpRequest();
+   ajax.open("POST","http://localhost:3000/author/?perPage=2&page="+ page.toString(),true);
+
+   ajax.onreadystatechange = function() {
+     if (this.readyState == 4) {
+       if (this.status == 200) {
+         var data = JSON.parse(this.responseText);
+         console.log(data)
+         data.forEach(function(post){
+           var postUrl = post.url.replace(/\s/g, "-");
+           var postContent = post.postCont.split(/\s+/).slice(0,100).join(" ") + " ...";
+           var deleteUrl = post._id
+           var updateUrl = post._id
+           $(".postWall" ).append("<a href ='/stories/" + postUrl + "'>" + "<h3>" + post.title +"</h3>" + "<p>" + postContent + "</a>&nbsp;&nbsp;&nbsp;&nbsp;" + "<a href ='" + deleteUrl + "'>"+ "<i class='icn fas fa-trash-alt'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;" + "<a href ='" + updateUrl + "'>" + "<i class='icn fas fa-edit'></i></a></p>" );
+         });
+       }
+     }
+   };
+   var formData = new FormData();
+   ajax.send(formData);
+ }
+
+ </script>
 <%- include("partials/footer") -%>

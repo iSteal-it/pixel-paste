@@ -218,3 +218,7 @@ textarea {
 	box-shadow:none;
 	background-color: #333;
 }
+
+.icn:hover {
+	color: gray;
+}

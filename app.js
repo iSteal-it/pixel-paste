@@ -139,6 +139,16 @@ app.get("/author",async function(req,res){
   }
 });
 
+app.post("/author",async function(req, res) {
+  if (req.isAuthenticated()){
+  const p = await Post.find({author:req.user.author}).paginate(req)
+  var posts = p["data"]
+  res.json(posts)
+  } else {
+    res.redirect("/login")
+  }
+});
+
 
 app.post("/register",function(req,res){
   if (req.body.password != req.body.cpassword) {
