@@ -133,7 +133,6 @@ app.get("/login",function(req,res){
 app.get("/author",async function(req,res){
   if (req.isAuthenticated()){
     const p = await Post.find({ author: req.user.author }).paginate(req)
-    console.log(p)
     res.render("author",{posts:p["data"],currentPage:p["currentPage"],lastpage:p["lastPage"]})
   } else {
     res.redirect("/login")
@@ -340,7 +339,7 @@ app.post("/compose/:id", function(req,res) {
 
 // unknown urls
 app.get('*', function(req, res) {
-  res.status(404).render('404');
+  res.render('404');
 });
 
 app.use((err, req, res, next) => {

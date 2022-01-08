@@ -6,21 +6,31 @@
 <br>
 <h2> Featured Stories</h2>
 <br>
+<div class="postWall">
   <% posts.forEach(function(post){%>
-      <a href="/stories/<%=post.url.replace(/\s/g, "-")%>" class="pc" ><h3><%=post.title%></h3>
+      <a href="/stories/<%=post.url.replace(/\s/g, "-")%>"><h3><%=post.title%></h3>
      <p>
        <%=post.postCont.split(/\s+/).slice(0,100).join(" ") + " ..."%>
-  </a>&nbsp;&nbsp;&nbsp;&nbsp;
+  </a>
      </p>
   <%})%>
+</div>
+
 
 <script type="text/javascript">
 
-var page = 2
+var page = 2;
+
+window.onscroll = function(ev) {
+
+  if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
+      getData();
+      page++;
+  }
+};
 
 function getData(){
   var ajax = new XMLHttpRequest();
-
   ajax.open("POST","http://localhost:3000/?page="+ page.toString(),true);
 
   ajax.onreadystatechange = function() {
@@ -28,18 +38,16 @@ function getData(){
       if (this.status == 200) {
         var data = JSON.parse(this.responseText);
         data.forEach(function(post){
-          
-        })
+          var postUrl = post.url.replace(/\s/g, "-");
+          var postContent = post.postCont.split(/\s+/).slice(0,100).join(" ") + " ...";
+          $(".postWall" ).append("<a href ='/stories/" + postUrl + "'>" + "<h3>" + post.title +"</h3>" + "<p>" + postContent + "</a></p>");
+        });
       }
     }
-  }
+  };
   var formData = new FormData();
-  ajax.send(formData)
+  ajax.send(formData);
 }
-window.onscroll = function(ev) {
-  if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
-      getData()
-  }
-};
+
 </script>
 <%- include("partials/footer") -%>
