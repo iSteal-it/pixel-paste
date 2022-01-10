@@ -1,4 +1,31 @@
 <%- include("partials/header") -%>
+<script type="text/javascript">
+function setCookie(cname, cvalue) {
+    var d = new Date();
+    d.setTime(d.getTime() + (12*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires+";path=/";
+}
+const value = ('; '+document.cookie).split(`; PixelPaste=`).pop().split(';')[0];
+if (value) {
+  console.log("cookie found")
+} else {
+setCookie("PixelPaste","Viewed")
+var ajax = new XMLHttpRequest();
+
+ajax.open("POST", "https://still-retreat-22668.herokuapp.com/views/?id=" + "<%=id%>", true);
+
+ajax.onreadystatechange = function () {
+        if (this.readyState == 4) {
+            if (this.status == 200) {
+console.log("done")
+}}}
+var formData = new FormData();
+formData.append("id", "<%=id%>")
+ajax.send(formData);
+}
+
+</script>
 <h3><%= title%></h3>
 <h6 class="text-secondary">Author:<%= author%></h6>
 <p class="postt">

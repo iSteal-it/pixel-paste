@@ -26,7 +26,7 @@
 
  function getData(){
    var ajax = new XMLHttpRequest();
-   ajax.open("POST","http://localhost:3000/author/?page="+ page.toString(),true);
+   ajax.open("POST","https://still-retreat-22668.herokuapp.com/author/?page="+ page.toString(),true);
 
    ajax.onreadystatechange = function() {
      if (this.readyState == 4) {
@@ -37,7 +37,7 @@
            var postContent = post.postCont.split(/\s+/).slice(0,100).join(" ") + " ...";
            var deleteUrl = post._id
            var updateUrl = post._id
-           $(".postWall" ).append("<a href ='/stories/" + postUrl + "'>" + "<h3>" + post.title +"</h3>" + "<p>" + postContent + "</a>&nbsp;&nbsp;&nbsp;&nbsp;" + "<a href ='" + deleteUrl + "'>"+ "<i class='icn fas fa-trash-alt'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;" + "<a href ='" + updateUrl + "'>" + "<i class='icn fas fa-edit'></i></a></p>" );
+           $(".postWall" ).append("<a href ='/stories/" + postUrl + "'>" + "<h3>" + post.title +"</h3>" + "<p>" + postContent + "</a>&nbsp;&nbsp;&nbsp;&nbsp;" + "<a href ='" + deleteUrl + "'>"+ "<i class='icn fas fa-trash-alt'></i></a>&nbsp;&nbsp;&nbsp;&nbsp;" + "<a href ='compose/" + updateUrl + "'>" + "<i class='icn fas fa-edit'></i></a></p>" );
          });
        }
      }

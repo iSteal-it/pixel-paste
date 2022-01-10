@@ -27,7 +27,7 @@ app.use(passport.session());
 
 
 // connection to mongodb using mongoose
-mongoose.connect("mongodb://localhost:27017/pixelpaste", {
+mongoose.connect("mongodb+srv://admin:Alyadav1@@cluster0.9mtcx.mongodb.net/pixelpaste", {
   useNewUrlParser: true,
   useUnifiedTopology: true
 });
@@ -56,6 +56,10 @@ const postSchema = new mongoose.Schema({
   feature: {
     type: Number,
     required:true
+  },
+  views: {
+    type:Number,
+    default:0
   }
 });
 
@@ -97,6 +101,18 @@ app.post("/",async function(req, res) {
   res.json(posts)
 });
 
+app.post("/views", async function(req, res){
+  var id = req.query.id.toString()
+  Post.findOneAndUpdate({_id:id},{$inc:{views:1}},null,function(err,result){
+    if (err) {
+      console.log(err)
+    } else {
+      console.log("updated views")
+    }
+  })
+  res.json("");
+})
+
 app.get("/contact-us", function(req, res) {
   res.render("contact")
 });
@@ -110,6 +126,10 @@ app.get("/privacy-policy", function(req, res) {
   res.render("privacy-policy")
 });
 
+app.get("/ads.txt", function(req,res) {
+  res.sendFile(__dirname, 'public/ads.txt')
+})
+
 app.get("/register",function(req,res){
   res.render("register", {
     error: ""
@@ -118,7 +138,7 @@ app.get("/register",function(req,res){
 
 app.get("/login",function(req,res){
 
-  if (req.get('referer') === "http://localhost:3000/login") {
+  if (req.get('referer') === "https://still-retreat-22668.herokuapp.com/login") {
     res.render("login",{
       error:"Invalid Email Or Password"
     })
@@ -212,6 +232,7 @@ app.get("/stories/:title", function(req, res) {
         title: results[0].title,
         story: results[0].postCont,
         author: results[0].author,
+        id:results[0]._id
       })
 
     } else {
@@ -361,6 +382,7 @@ app.use((err, req, res, next) => {
 
 });
 
-app.listen("3000", function() {
-  console.log("server started at port 3000");
-});
+app.listen(process.env.PORT);
+// app.listen("3000", function() {
+//   console.log("server started at port 3000");
+// });
