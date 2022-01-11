@@ -18,9 +18,9 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.static("public"));
 app.use(session({
-  secret:"Our little secret.",
-  resave:false,
-  saveUninitialized:false
+  secret: "Our little secret.",
+  resave: false,
+  saveUninitialized: false
 }));
 app.use(passport.initialize());
 app.use(passport.session());
@@ -38,8 +38,8 @@ mongoose.set('useCreateIndex', true);
 // creating collection
 const postSchema = new mongoose.Schema({
   url: {
-    type:String,
-    required:true
+    type: String,
+    required: true
   },
   title: {
     type: String,
@@ -55,11 +55,11 @@ const postSchema = new mongoose.Schema({
   },
   feature: {
     type: Number,
-    required:true
+    required: true
   },
   views: {
-    type:Number,
-    default:0
+    type: Number,
+    default: 0
   }
 });
 
@@ -67,43 +67,55 @@ postSchema.plugin(pagination)
 const Post = mongoose.model("Post", postSchema);
 
 
-const userSchema = new mongoose.Schema ({
-  email:String,
-  password:String,
-  author:{
-    type:String,
-    unique:true
+const userSchema = new mongoose.Schema({
+  email: String,
+  password: String,
+  author: {
+    type: String,
+    unique: true
   }
 });
 userSchema.plugin(passportLocalMongoose);
-const User = new mongoose.model("User",userSchema)
+const User = new mongoose.model("User", userSchema)
 
 passport.use(new LocalStrategy({
-    usernameField: 'email',
-  },User.authenticate()));
+  usernameField: 'email',
+}, User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
-app.use(function (req, res, next) {
-res.locals.login = req.user;
-next();
+app.use(function(req, res, next) {
+  res.locals.login = req.user;
+  next();
 })
 
 
 // routes
-app.get("/",async function(req, res) {
-  const p = await Post.find({feature:1}).paginate(req)
-  res.render("home",{posts:p["data"],currentPage:p["currentPage"],lastpage:p["lastPage"]})
+app.get("/", async function(req, res) {
+  const p = await Post.find({
+    feature: 1
+  }).paginate(req)
+  res.render("home", {
+    posts: p["data"]
+  })
 });
 
-app.post("/",async function(req, res) {
-  const p = await Post.find({feature:1}).paginate(req)
+app.post("/", async function(req, res) {
+  const p = await Post.find({
+    feature: 1
+  }).paginate(req)
   var posts = p["data"]
   res.json(posts)
 });
 
-app.post("/views", async function(req, res){
+app.post("/views", async function(req, res) {
   var id = req.query.id.toString()
-  Post.findOneAndUpdate({_id:id},{$inc:{views:1}},null,function(err,result){
+  Post.findOneAndUpdate({
+    _id: id
+  }, {
+    $inc: {
+      views: 1
+    }
+  }, null, function(err, result) {
     if (err) {
       console.log(err)
     } else {
@@ -111,13 +123,13 @@ app.post("/views", async function(req, res){
     }
   })
   res.json("");
-})
+});
 
 app.get("/contact-us", function(req, res) {
   res.render("contact")
 });
 
-app.get("/logout",function(req, res){
+app.get("/logout", function(req, res) {
   req.logout()
   res.redirect("/login")
 });
@@ -126,69 +138,143 @@ app.get("/privacy-policy", function(req, res) {
   res.render("privacy-policy")
 });
 
-app.get("/ads.txt", function(req,res) {
+app.get("/ads.txt", function(req, res) {
   res.sendFile(__dirname, 'public/ads.txt')
 })
 
-app.get("/register",function(req,res){
+app.get("/register", function(req, res) {
   res.render("register", {
     error: ""
   })
 });
 
-app.get("/login",function(req,res){
+app.get("/login", function(req, res) {
 
   if (req.get('referer') === "https://still-retreat-22668.herokuapp.com/login") {
-    res.render("login",{
-      error:"Invalid Email Or Password"
+    res.render("login", {
+      error: "Invalid Email Or Password"
     })
   } else {
-    res.render('login',{
-      error:""
+    res.render('login', {
+      error: ""
     })
   }
 
 });
 
-app.get("/author",async function(req,res){
-  if (req.isAuthenticated()){
-    const p = await Post.find({ author: req.user.author }).paginate(req)
-    res.render("author",{posts:p["data"],currentPage:p["currentPage"],lastpage:p["lastPage"]})
+app.get("/author", async function(req, res) {
+  if (req.isAuthenticated()) {
+    const p = await Post.find({
+      author: req.user.author
+    }).paginate(req)
+    res.render("author", {
+      posts: p["data"]
+    })
   } else {
     res.redirect("/login")
   }
 });
 
-app.post("/author",async function(req, res) {
-  if (req.isAuthenticated()){
-  const p = await Post.find({author:req.user.author}).paginate(req)
-  var posts = p["data"]
-  res.json(posts)
+app.get("/admin", function(req, res){
+  if (req.isAuthenticated()) {
+    if (req.user.author === "admin") {
+      res.render("admin")
+    } else {
+      res.redirect("/")
+    }
+  } else {
+    res.redirect("/")
+  }
+});
+
+app.post("/admin", async function(req, res){
+  var author = req.query.author
+
+  Post.updateMany({author:author},{views:0},null,function(err,results){
+    if (err) {
+      console.log(err)
+    } else {
+      res.json("done")
+    }
+  })
+});
+
+app.post("/getviews", async function(req, res){
+  var totalview = 0;
+  var post = 0
+  var author = req.query.author.toString()
+  Post.find({author:author}, function(err,results){
+    if (err) {
+      console.log(err)
+    } else {
+      results.forEach(function(result){
+        totalview = totalview + result["views"]
+        post = post + 1
+      });
+      res.json({views:totalview,posts:post})
+    }
+  })
+})
+
+app.get("/earnings", function(req, res) {
+  if (req.isAuthenticated()) {
+    var totalview = 0
+    Post.find({
+      author: req.user.author
+    }, function(err, results) {
+      if (err) {
+        console.log(err)
+      } else {
+        results.forEach(function(result) {
+          totalview = totalview + result["views"]
+        });
+        res.render("earnings", {
+          views: totalview,
+          money: totalview * 0.002
+        })
+      };
+    });
+
+  } else {
+    res.redirect("/login")
+  }
+});
+
+app.post("/author", async function(req, res) {
+  if (req.isAuthenticated()) {
+    const p = await Post.find({
+      author: req.user.author
+    }).paginate(req)
+    var posts = p["data"]
+    res.json(posts)
   } else {
     res.redirect("/login")
   }
 });
 
 
-app.post("/register",function(req,res){
+app.post("/register", function(req, res) {
   if (req.body.password != req.body.cpassword) {
     res.render("register", {
-      error:"Password Don't Match"
+      error: "Password Don't Match"
     })
   } else {
-    User.register({username:req.body.email,author:req.body.author},req.body.password,function(err,user){
+    User.register({
+      username: req.body.email,
+      author: req.body.author
+    }, req.body.password, function(err, user) {
       if (err) {
         if (err.name == "UserExistsError") {
           res.render("register", {
-            error:"Email Already Exist"
+            error: "Email Already Exist"
           })
         } else if (err.name == "MongoError") {
           res.render("register", {
-            error:"Pick Different Author Name"
+            error: "Pick Different Author Name"
           })
         }
       } else {
-        passport.authenticate("local")(req,res,function(){
+        passport.authenticate("local")(req, res, function() {
           res.redirect("/author");
         });
       }
@@ -196,27 +282,28 @@ app.post("/register",function(req,res){
   };
 });
 
-app.post("/login",function(req,res){
+app.post("/login", function(req, res) {
 
   const user = new User({
-    username:req.body.email,
-    password:req.body.password
+    username: req.body.email,
+    password: req.body.password
   });
 
-  req.login(user,function(err){
+  req.login(user, function(err) {
     if (err) {
       console.log(err)
       res.redirect("/login", {
-        error:"not ok"
+        error: "not ok"
       })
     } else {
-      passport.authenticate("local",{failureRedirect:'/login'})(req,res,function(){
+      passport.authenticate("local", {
+        failureRedirect: '/login'
+      })(req, res, function() {
         res.redirect("/author")
       });
     }
   });
 });
-
 
 // load post
 app.get("/stories/:title", function(req, res) {
@@ -232,7 +319,7 @@ app.get("/stories/:title", function(req, res) {
         title: results[0].title,
         story: results[0].postCont,
         author: results[0].author,
-        id:results[0]._id
+        id: results[0]._id
       })
 
     } else {
@@ -267,26 +354,26 @@ app.post("/compose", function(req, res) {
   } else {
     var feature = 1;
   }
-  if (req.isAuthenticated()){
+  if (req.isAuthenticated()) {
     var Author = req.user.author
   } else {
     var Author = "Anonymous"
   }
   const titleH = _.lowerCase(req.body.title)
   Post.find({
-    url:titleH
-  }, function(err , results){
+    url: titleH
+  }, function(err, results) {
     if (err) {
       console.log(err)
     } else if (results.length > 0) {
       var rnd = Math.floor(Math.random() * 1000);
       var addUrl = titleH + " " + rnd
       const story = {
-        url:addUrl.toString(),
+        url: addUrl.toString(),
         title: req.body.title.toString(),
         author: Author,
         postCont: req.body.story.toString(),
-        feature:feature
+        feature: feature
       };
       var add = new Post(story);
       add.save()
@@ -294,11 +381,11 @@ app.post("/compose", function(req, res) {
     } else {
       var addUrl = _.lowerCase(req.body.title)
       const story = {
-        url:addUrl.toString(),
+        url: addUrl.toString(),
         title: req.body.title.toString(),
         author: Author,
         postCont: req.body.story.toString(),
-        feature:feature
+        feature: feature
       };
       var add = new Post(story);
       add.save()
@@ -309,23 +396,22 @@ app.post("/compose", function(req, res) {
 
 
 // delete post
-app.get("/:id", function(req,res) {
-  Post.findOneAndDelete ({
-    _id:req.params.id
+app.get("/:id", function(req, res) {
+  Post.findOneAndDelete({
+    _id: req.params.id
   }, function(err, post) {
     if (!err && post) {
       console.log("deleted")
     } else {
       console.log(err)
     }
-  }
-  )
+  })
   res.redirect("/author")
 });
 
 
 // update post
-app.get("/compose/:id", function(req,res) {
+app.get("/compose/:id", function(req, res) {
   Post.find({
     _id: req.params.id
   }, function(err, results) {
@@ -336,14 +422,14 @@ app.get("/compose/:id", function(req,res) {
         title: results[0].title,
         story: results[0].postCont,
         author: results[0].author,
-        id:results[0]._id,
-        feature:results[0].feature
+        id: results[0]._id,
+        feature: results[0].feature
       })
     }
   })
 });
 
-app.post("/compose/:id", function(req,res) {
+app.post("/compose/:id", function(req, res) {
   if (req.body.features === undefined) {
     var feature = 0;
   } else {
@@ -351,14 +437,18 @@ app.post("/compose/:id", function(req,res) {
   }
   Post.findOneAndUpdate({
     _id: req.params.id.toString()
-  },{postCont: req.body.story.toString(),title:req.body.title.toString(),feature:feature},null, function(err, results) {
+  }, {
+    postCont: req.body.story.toString(),
+    title: req.body.title.toString(),
+    feature: feature
+  }, null, function(err, results) {
     if (err) {
       console.log(err)
     }
   })
   Post.find({
-    _id:req.params.id.toString()
-  },function(err,results){
+    _id: req.params.id.toString()
+  }, function(err, results) {
     if (err) {
       console.log(err)
     } else {
@@ -382,7 +472,7 @@ app.use((err, req, res, next) => {
 
 });
 
-app.listen(process.env.PORT);
-// app.listen("3000", function() {
-//   console.log("server started at port 3000");
-// });
+// app.listen(process.env.PORT);
+app.listen("3000", function() {
+  console.log("server started at port 3000");
+});
