@@ -1,11 +1,18 @@
 <%- include("partials/header") -%>
 <br>
+<h6>Total views:<%=totalviews%></h6>
+<h6>Total posts:<%=totalposts%></h6>
+<h6>User Count:<%=users%></h6>
+<h6>Net turnover:$<%=netTurnover%></h6>
+<h6>Cost:$<%=cost%></h6>
+<br>
 <label for="">Enter Author Name Below</label>
     <input id="author" class="form-control" name="author" required>
     <br>
     <button id="reset" class="btn btn-dark" type="button" name="button">Reset</button>
 
 <button id="views"  class="btn btn-dark" type="button" name="button">Views</button>
+<button id="cost"  class="btn btn-dark" type="button" name="button">cost</button>
 <br>
 <div class="item">
 
@@ -48,6 +55,27 @@ var ajax = new XMLHttpRequest();
 
   var formData = new FormData();
   ajax.send(formData);
+
+});
+
+$("#cost").click(function(){
+var author = $("#author").val();
+var ajax = new XMLHttpRequest();
+
+  ajax.open("POST","https://still-retreat-22668.herokuapp.com/cost?author=" + author,true);
+
+  ajax.onreadystatechange = function() {
+    if (this.readyState == 4) {
+      if (this.status == 200) {
+        var data = JSON.parse(this.responseText);
+        $(".item").append("<h6>"+"reset done"+"</h6>")
+      }
+    }
+  };
+
+  var formData = new FormData();
+  ajax.send(formData);
+
 });
 
 </script>

@@ -8,7 +8,7 @@ const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const LocalStrategy = require('passport-local').Strategy
 const pagination = require('express-mongoose-pagination')
-
+var cost = 0.002
 
 // setting up app
 const app = express();
@@ -178,13 +178,41 @@ app.get("/author", async function(req, res) {
 app.get("/admin", function(req, res){
   if (req.isAuthenticated()) {
     if (req.user.author === "admin") {
-      res.render("admin")
+      var posts = 0;
+      var totalview = 0;
+
+      Post.find({},function(err,results){
+        if (err) {
+          console.log(err)
+        } else {
+          results.forEach(function(result){
+            posts = posts + 1
+            totalview = totalview + result["views"]
+          })
+          User.countDocuments({},function(err,count){
+            if (err) {
+              console.log(err)
+            } else {
+              res.render("admin",{totalposts:posts,totalviews:totalview,users:count,netTurnover:totalview*cost,cost:cost})
+            }
+          })
+
+        }
+      })
     } else {
       res.redirect("/")
     }
   } else {
     res.redirect("/")
   }
+});
+
+app.post("/cost", function(req, res){
+  var author = req.query.author
+
+  cost = author
+
+  res.json("")
 });
 
 app.post("/admin", async function(req, res){
@@ -230,7 +258,8 @@ app.get("/earnings", function(req, res) {
         });
         res.render("earnings", {
           views: totalview,
-          money: totalview * 0.002
+          money: totalview * cost,
+          cost: cost * 1000
         })
       };
     });
