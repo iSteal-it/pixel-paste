@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const _ = require("lodash");
@@ -27,9 +29,11 @@ app.use(passport.session());
 
 
 // connection to mongodb using mongoose
-mongoose.connect("mongodb+srv://admin:Alyadav1@@cluster0.9mtcx.mongodb.net/pixelpaste", {
+mongoose.connect(process.env.DATABASE_URL, {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  tls:true,
+  tlsCAFile:"./ca-certificate.crt"
 });
 mongoose.set('useFindAndModify', false);
 mongoose.set('useCreateIndex', true);

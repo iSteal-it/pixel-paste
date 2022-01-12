@@ -10,7 +10,7 @@
   <% posts.forEach(function(post){%>
       <a href="/stories/<%=post.url.replace(/\s/g, "-")%>"><h3><%=post.title%></h3>
      <p>
-       <%=post.postCont.split(/\s+/).slice(0,100).join(" ") + " ..."%>
+       <%=post.postCont.split(/\s+/).slice(0,50).join(" ") + " ..."%>
   </a>
      </p>
   <%})%>
@@ -39,7 +39,7 @@ function getData(){
         var data = JSON.parse(this.responseText);
         data.forEach(function(post){
           var postUrl = post.url.replace(/\s/g, "-");
-          var postContent = post.postCont.split(/\s+/).slice(0,100).join(" ") + " ...";
+          var postContent = post.postCont.split(/\s+/).slice(0,50).join(" ") + " ...";
           $(".postWall" ).append("<a href ='/stories/" + postUrl + "'>" + "<h3>" + post.title +"</h3>" + "<p>" + postContent + "</a></p>");
         });
       }
