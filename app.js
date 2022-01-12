@@ -505,7 +505,7 @@ app.use((err, req, res, next) => {
 
 });
 
-// app.listen(process.env.PORT);
+app.listen(process.env.PORT);
 // app.listen("3000", function() {
 //   console.log("server started at port 3000");
 // });
