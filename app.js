@@ -11,6 +11,7 @@ const passportLocalMongoose = require("passport-local-mongoose");
 const LocalStrategy = require('passport-local').Strategy
 const pagination = require('express-mongoose-pagination')
 var cost = 0.002
+const port = process.env.PORT || 3000;
 
 // setting up app
 const app = express();
@@ -505,7 +506,9 @@ app.use((err, req, res, next) => {
 
 });
 
-app.listen(process.env.PORT);
+// app.listen(process.env.PORT);
 // app.listen("3000", function() {
 //   console.log("server started at port 3000");
 // });
+
+app.listen(port, () => console.log(`App listening on port ${port}!`));
