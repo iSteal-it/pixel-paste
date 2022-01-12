@@ -23,7 +23,7 @@ $("#views").click(function(){
 var author = $("#author").val();
 var ajax = new XMLHttpRequest();
 
-  ajax.open("POST","https://still-retreat-22668.herokuapp.com/getviews?author=" + author,true);
+  ajax.open("POST","https://pixelpaste.net/getviews?author=" + author,true);
 
   ajax.onreadystatechange = function() {
     if (this.readyState == 4) {
@@ -42,7 +42,7 @@ $("#reset").click(function(){
 var author = $("#author").val();
 var ajax = new XMLHttpRequest();
 
-  ajax.open("POST","https://still-retreat-22668.herokuapp.com/admin?author=" + author,true);
+  ajax.open("POST","https://pixelpaste.net/admin?author=" + author,true);
 
   ajax.onreadystatechange = function() {
     if (this.readyState == 4) {
@@ -62,7 +62,7 @@ $("#cost").click(function(){
 var author = $("#author").val();
 var ajax = new XMLHttpRequest();
 
-  ajax.open("POST","https://still-retreat-22668.herokuapp.com/cost?author=" + author,true);
+  ajax.open("POST","https://pixelpaste.net/cost?author=" + author,true);
 
   ajax.onreadystatechange = function() {
     if (this.readyState == 4) {

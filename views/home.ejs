@@ -31,7 +31,7 @@ window.onscroll = function(ev) {
 
 function getData(){
   var ajax = new XMLHttpRequest();
-  ajax.open("POST","https://still-retreat-22668.herokuapp.com/?page="+ page.toString(),true);
+  ajax.open("POST","https://pixelpaste.net/?page="+ page.toString(),true);
 
   ajax.onreadystatechange = function() {
     if (this.readyState == 4) {

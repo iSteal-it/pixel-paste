@@ -13,7 +13,7 @@ if (value) {
 setCookie("PixelPaste","Viewed")
 var ajax = new XMLHttpRequest();
 
-ajax.open("POST", "https://still-retreat-22668.herokuapp.com/views/?id=" + "<%=id%>", true);
+ajax.open("POST", "https://pixelpaste.net/views/?id=" + "<%=id%>", true);
 
 ajax.onreadystatechange = function () {
         if (this.readyState == 4) {
