@@ -155,15 +155,11 @@ app.get("/register", function(req, res) {
 
 app.get("/login", function(req, res) {
 
-  if (req.get('referer') === "https://pixelpaste.net/login") {
-    res.render("login", {
-      error: "Invalid Email Or Password"
-    })
-  } else {
+   
     res.render('login', {
       error: ""
     })
-  }
+  
 
 });
 
