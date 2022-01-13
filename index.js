@@ -112,23 +112,6 @@ app.post("/", async function(req, res) {
   res.json(posts)
 });
 
-app.post("/views", async function(req, res) {
-  var id = req.query.id.toString()
-  Post.findOneAndUpdate({
-    _id: id
-  }, {
-    $inc: {
-      views: 1
-    }
-  }, null, function(err, result) {
-    if (err) {
-      console.log(err)
-    } else {
-      console.log("updated views")
-    }
-  })
-  res.json("");
-});
 
 app.get("/contact-us", function(req, res) {
   res.render("contact")
@@ -153,19 +136,25 @@ app.get("/register", function(req, res) {
   })
 });
 
-app.get("/login", function(req, res) {
 
-  if (req.get('referer') === "https://pixelpaste.net/login") {
-    res.render("login", {
-      error: "Invalid Email Or Password"
-    })
-  } else {
-    res.render('login', {
-      error: ""
-    })
-  }
-
+app.post("/views", async function(req, res) {
+  var id = req.query.id.toString()
+  Post.findOneAndUpdate({
+    _id: id
+  }, {
+    $inc: {
+      views: 1
+    }
+  }, null, function(err, result) {
+    if (err) {
+      console.log(err)
+    } else {
+      console.log("updated views")
+    }
+  })
+  res.json("");
 });
+
 
 app.get("/author", async function(req, res) {
   if (req.isAuthenticated()) {
@@ -177,6 +166,61 @@ app.get("/author", async function(req, res) {
     })
   } else {
     res.redirect("/login")
+  }
+});
+
+app.post("/author", async function(req, res) {
+  if (req.isAuthenticated()) {
+    const p = await Post.find({
+      author: req.user.author
+    }).paginate(req)
+    var posts = p["data"]
+    res.json(posts)
+  } else {
+    res.redirect("/login")
+  }
+});
+
+
+app.get("/earnings", async function(req, res) {
+  if (req.isAuthenticated()) {
+    var totalview = 0
+    await Post.find({
+      author: req.user.author
+    }, function(err, results) {
+      if (err) {
+        console.log(err)
+      } else {
+        results.forEach(function(result) {
+          totalview = totalview + result["views"]
+        });
+        res.render("earnings", {
+          views: totalview,
+          money: totalview * cost,
+          cost: cost * 1000
+        })
+      };
+    });
+
+  } else {
+    res.redirect("/login")
+  }
+});
+
+app.get("/login", function(req, res) {
+
+  if (req.isAuthenticated()) {
+    res.redirect("/author")
+  } else {
+    if (req.get('referer') === "https://pixelpaste.net/login") {
+      res.render("login", {
+        error: "Invalid Email Or Password"
+      })
+    } else {
+      res.render('login', {
+        error: ""
+      })
+    }
   }
 });
 
@@ -248,44 +292,6 @@ app.post("/getviews", async function(req, res){
     }
   })
 })
-
-app.get("/earnings", function(req, res) {
-  if (req.isAuthenticated()) {
-    var totalview = 0
-    Post.find({
-      author: req.user.author
-    }, function(err, results) {
-      if (err) {
-        console.log(err)
-      } else {
-        results.forEach(function(result) {
-          totalview = totalview + result["views"]
-        });
-        res.render("earnings", {
-          views: totalview,
-          money: totalview * cost,
-          cost: cost * 1000
-        })
-      };
-    });
-
-  } else {
-    res.redirect("/login")
-  }
-});
-
-app.post("/author", async function(req, res) {
-  if (req.isAuthenticated()) {
-    const p = await Post.find({
-      author: req.user.author
-    }).paginate(req)
-    var posts = p["data"]
-    res.json(posts)
-  } else {
-    res.redirect("/login")
-  }
-});
-
 
 app.post("/register", function(req, res) {
   if (req.body.password != req.body.cpassword) {
