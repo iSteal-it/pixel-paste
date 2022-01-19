@@ -134,6 +134,10 @@ app.get("/arc-sw.js", function(req, res) {
   res.sendFile(__dirname, 'public/arc-sw.js')
 })
 
+app.get("/arc-sw.js", function(req, res) {
+  res.sendFile(__dirname, 'public/pixelpaste.net-hm-min.js')
+})
+
 app.get("/register", function(req, res) {
   res.render("register", {
     error: ""
