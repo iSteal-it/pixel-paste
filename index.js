@@ -138,6 +138,11 @@ app.get("/pixelpaste-net-hm-min.js", function(req, res) {
   res.sendFile(__dirname, 'public/pixelpaste-net-hm-min.js')
 })
 
+
+app.get("/test", function(req, res) {
+  res.sendFile(__dirname, 'public/test.html')
+})
+
 app.get("/register", function(req, res) {
   res.render("register", {
     error: ""
