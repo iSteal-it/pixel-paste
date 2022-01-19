@@ -134,7 +134,7 @@ app.get("/arc-sw.js", function(req, res) {
   res.sendFile(__dirname, 'public/arc-sw.js')
 })
 
-app.get("/arc-sw.js", function(req, res) {
+app.get("/pixelpaste.net-hm-min.js", function(req, res) {
   res.sendFile(__dirname, 'public/pixelpaste.net-hm-min.js')
 })
 
