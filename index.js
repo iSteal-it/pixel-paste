@@ -330,27 +330,8 @@ app.post("/register", function(req, res) {
   };
 });
 
-app.post("/login", function(req, res) {
-
-  const user = new User({
-    username: req.body.email,
-    password: req.body.password
-  });
-
-  req.login(user, function(err) {
-    if (err) {
-      console.log(err)
-      res.redirect("/login", {
-        error: "not ok"
-      })
-    } else {
-      passport.authenticate("local", {
-        failureRedirect: '/login'
-      })(req, res, function() {
-        res.redirect("/author")
-      });
-    }
-  });
+app.post("/login",passport.authenticate("local"), function(req, res) {
+  res.redirect("/author")
 });
 
 // load post
