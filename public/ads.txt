@@ -6,6 +6,17 @@ google.com, pub-8585258819115152, DIRECT, f08c47fec0942fa0
 google.com, pub-8743652276162773, DIRECT, f08c47fec0942fa0
 google.com, pub-5610016226208267, DIRECT, f08c47fec0942fa0
 
+agencyorquidea.com, 1572, DIRECT
+google.com, pub-2726428685015992, RESELLER, f08c47fec0942fa0
+google.com, pub-7913044002918072, DIRECT, f08c47fec0942fa0
+google.com, pub-7915887679464005, RESELLER
+google.com, pub-2205121062140812, RESELLER, f08c47fec0942fa0 
+google.com, pub-2603664881560000, DIRECT, f08c47fec0942fa0 
+google.com, pub-3132893725603935, DIRECT, f08c47fec0942fa0
+mgid.com, 478578, DIRECT, d4c29acad76ce94f
+outbrain.com, 00cf03dbdd20d696df07a92b3b8fd2f7e2, DIRECT
+revcontent.com, 122063, DIRECT
+pubmatic.com, 160044, RESELLER, 5d62403b186f2ace
 
 #Hooligan Media (hooliganmedia.com)
 
@@ -332,3 +343,4 @@ indexexchange.com, 179394, RESELLER, 50b1c356f2c5c8fc
 smartadserver.com, 1175, DIRECT
 indexexchange.com, 186512, RESELLER, 50b1c356f2c5c8fc
 indexexchange.com, 188673, RESELLER, 50b1c356f2c5c8fc
+
