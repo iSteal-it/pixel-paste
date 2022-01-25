@@ -18,7 +18,7 @@ outbrain.com, 00cf03dbdd20d696df07a92b3b8fd2f7e2, DIRECT
 revcontent.com, 122063, DIRECT
 pubmatic.com, 160044, RESELLER, 5d62403b186f2ace
 
-#Hooligan Media (hooliganmedia.com)
+
 
 google.com, pub-6933766640002702, DIRECT, f08c47fec0942fa0
 google.com, pub-7410423519583759, DIRECT, f08c47fec0942fa0
