@@ -10,7 +10,7 @@ const passport = require("passport");
 const passportLocalMongoose = require("passport-local-mongoose");
 const LocalStrategy = require('passport-local').Strategy
 const pagination = require('express-mongoose-pagination')
-var cost = 0.002
+var cost = 0.001
 const port = process.env.PORT || 3000;
 
 // setting up app
