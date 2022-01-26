@@ -78,21 +78,11 @@ a:hover {
   position: absolute;
   z-index: 1;
 	top: -5px;
-  right: 175%;
+  left: 175%;
 }
 
 .mtooltip:hover .mtooltiptext {
   visibility: visible;
-}
-.mtooltip .mtooltiptext::after {
-  content: " ";
-  position: absolute;
-  top: 15%;
-  left: 100%;
-  margin-top: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: transparent transparent transparent black;
 }
 
 .ma {
