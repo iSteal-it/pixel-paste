@@ -20,12 +20,20 @@
 <script type="text/javascript">
 
 var page = 2;
+var time = 0;
 
+function t() {
+  time = 0;
+  page++
+}
 window.onscroll = function(ev) {
 
   if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight) {
-      getData();
-      page++;
+      if (time === 0) {
+      time = 5
+      getData()
+      setTimeout(t, 3000)
+    }
   }
 };
 
