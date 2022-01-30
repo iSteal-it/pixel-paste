@@ -25,6 +25,14 @@ formData.append("id", "<%=id%>")
 ajax.send(formData);
 }
 
+$('#content').ready(function(){
+    $('.postt').each(function(){
+        var str = $(this).html();
+        var regex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+        var replaced_text = str.replace(regex, "<a class='clk' href='$1' target='_blank'>$1</a>");
+        $(this).html(replaced_text);
+    });
+});
 </script>
 <script src='//tags.orquideassp.com/tag/12384'></script>
  <input type="hidden" id="custId" name="custId" value="<%=id%>">
@@ -32,7 +40,7 @@ ajax.send(formData);
 <h3><%= title%></h3>
 <h6 class="text-secondary">Author:<%= author%></h6>
 <script src='//tags.orquideassp.com/tag/12382'></script>
-<p class="postt">
+<p class="postt" id="content">
 <%= story %>
 </p>
 <br>
