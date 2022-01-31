@@ -33,21 +33,18 @@ $('#content').ready(function(){
         $(this).html(replaced_text);
     });
 });
+
 </script>
-<script src='//tags.orquideassp.com/tag/12384'></script>
+
  <input type="hidden" id="custId" name="custId" value="<%=id%>">
- <script src='//tags.orquideassp.com/tag/12380'></script>
+
 <h3><%= title%></h3>
 <h6 class="text-secondary">Author:<%= author%></h6>
-<script src='//tags.orquideassp.com/tag/12382'></script>
-<div id="content">
-<p class="postt">
+<p class="postt" id="content">
 <%= story %>
 </p>
-</div>
 <br>
 <a href="/contact-us"><h6 class="text-danger">Report Abuse</h6></a>
 <script src='//tags.orquideassp.com/tag/12383'></script>
 <script src='//tags.orquideassp.com/tag/12381'></script>
-<script src='//tags.orquideassp.com/tag/12379'></script>
 <%- include("partials/footer") -%>
