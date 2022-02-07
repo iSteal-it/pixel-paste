@@ -16,6 +16,7 @@ const port = process.env.PORT || 3000;
 // setting up app
 const app = express();
 app.set("view engine", "ejs");
+app.set('trust proxy',true); 
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -336,6 +337,7 @@ app.post("/login",passport.authenticate("local"), function(req, res) {
 
 // load post
 app.get("/stories/:title", function(req, res) {
+  console.log(req.ip)
   const titles = _.lowerCase(req.params.title)
   Post.find({
     url: titles
