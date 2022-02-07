@@ -337,7 +337,7 @@ app.post("/login",passport.authenticate("local"), function(req, res) {
 
 // load post
 app.get("/stories/:title", function(req, res) {
-  console.log(req.ip)
+  
   const titles = _.lowerCase(req.params.title)
   Post.find({
     url: titles
