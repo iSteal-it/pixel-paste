@@ -84,6 +84,11 @@ const userSchema = new mongoose.Schema({
 userSchema.plugin(passportLocalMongoose);
 const User = new mongoose.model("User", userSchema)
 
+const ipSchema = new mongoose.Schema({
+  ip:String
+})
+const IP = new mongoose.model("IP",ipSchema)
+
 passport.use(new LocalStrategy({
   usernameField: 'email',
 }, User.authenticate()));
