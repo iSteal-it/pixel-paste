@@ -85,7 +85,8 @@ userSchema.plugin(passportLocalMongoose);
 const User = new mongoose.model("User", userSchema)
 
 const ipSchema = new mongoose.Schema({
-  ip:String
+  ip:String,
+  createdAt: { type: Date, expires: '720m', default: Date.now }
 })
 const IP = new mongoose.model("IP",ipSchema)
 
