@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({
 app.use(express.static("public"));
 app.use(session({
   secret: "Our little secret.",
-  cookie:{_expires : 60000000},
+  cookie:{_expires : 6000000000},
   resave: false,
   saveUninitialized: false
 }));
