@@ -345,6 +345,26 @@ app.post("/login",passport.authenticate("local"), function(req, res) {
 // load post
 app.get("/stories/:title", function(req, res) {
   
+  const userIp = req.ip
+  IP.find({
+    ip:userIp
+  },function(err, results){
+    if (err) {
+      console.log(err)
+    } else {
+      if (!results.length) {
+        const ip = {
+          ip:(req.ip)
+        }
+        var add = new IP(ip)
+        add.save()
+      } else {
+        console.log(results)
+        v = 1
+      }
+    }
+  });
+  
   const titles = _.lowerCase(req.params.title)
   Post.find({
     url: titles
