@@ -187,6 +187,9 @@ app.post("/views", async function(req, res) {
         console.log("already viewed")
       }
     }
+  })
+
+  res.json("");
 });
 
 
