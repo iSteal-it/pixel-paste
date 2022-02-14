@@ -155,20 +155,38 @@ app.get("/register", function(req, res) {
 
 app.post("/views", async function(req, res) {
   var id = req.query.id.toString()
-  Post.findOneAndUpdate({
-    _id: id
-  }, {
-    $inc: {
-      views: 1
-    }
-  }, null, function(err, result) {
+  IP.find({
+    ip:req.ip
+  }, function(err,results) {
     if (err) {
       console.log(err)
     } else {
-      console.log("updated views")
+      if (!results.length) {
+        console.log(1)
+        Post.findOneAndUpdate({
+          _id: id
+        }, {
+          $inc: {
+            views: 1
+          }
+        }, null, function(err, result) {
+          if (err) {
+            console.log(err)
+          } else {
+            console.log("updated views")
+          }
+        })
+
+        const ip = {
+          ip:(req.ip)
+        }
+        var add = new IP(ip)
+        add.save()
+        console.log("ip logged")
+      } else {
+        console.log("already viewed")
+      }
     }
-  })
-  res.json("");
 });
 
 
@@ -344,27 +362,6 @@ app.post("/login",passport.authenticate("local"), function(req, res) {
 
 // load post
 app.get("/stories/:title", function(req, res) {
-  
-  const userIp = req.ip
-  IP.find({
-    ip:userIp
-  },function(err, results){
-    if (err) {
-      console.log(err)
-    } else {
-      if (!results.length) {
-        const ip = {
-          ip:(req.ip)
-        }
-        var add = new IP(ip)
-        add.save()
-      } else {
-        console.log(results)
-        v = 1
-      }
-    }
-  });
-  
   const titles = _.lowerCase(req.params.title)
   Post.find({
     url: titles
