@@ -162,7 +162,7 @@ app.post("/views", async function(req, res) {
       console.log(err)
     } else {
       if (!results.length) {
-        console.log(1)
+        
         Post.findOneAndUpdate({
           _id: id
         }, {
