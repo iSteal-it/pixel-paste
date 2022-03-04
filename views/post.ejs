@@ -58,7 +58,17 @@ $('#content').ready(function(){
 </div>
 <h3><%= title%></h3>
 <h6 class="text-secondary">Author:<%= author%></h6>
-
+<script async src="https://securepubads.g.doubleclick.net/tag/js/gpt.js"></script>
+<div id="gpt-passback">
+  <script>
+    window.googletag = window.googletag || {cmd: []};
+    googletag.cmd.push(function() {
+    googletag.defineSlot('/8068523/PixelPaste.net_320x100', [320, 100], 'gpt-passback').addService(googletag.pubads());
+    googletag.enableServices();
+    googletag.display('gpt-passback');
+    });
+  </script>
+</div>
 <p class="postt" id="content">
 <%= story %>
 </p>
