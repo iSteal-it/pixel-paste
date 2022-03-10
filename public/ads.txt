@@ -1,6 +1,8 @@
 #adsense 
 google.com, pub-4658358621108372, DIRECT, f08c47fec0942fa0
-
+#Adsstar (contact@adsstar.in)
+google.com, pub-9180290541040712, DIRECT, f08c47fec0942fa0
+google.com, pub-1438709667234602, DIRECT, f08c47fec0942fa0
 
 google.com, pub-5413329544040947, RESELLER, f08c47fec0942fa0
 mgid.com, 703270, DIRECT, d4c29acad76ce94f
