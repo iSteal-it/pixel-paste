@@ -138,14 +138,6 @@ app.get("/ads.txt", function(req, res) {
   res.sendFile(__dirname, 'public/ads.txt')
 })
 
-app.get("/arc-sw.js", function(req, res) {
-  res.sendFile(__dirname, 'public/arc-sw.js')
-})
-
-app.get("/pixelpaste.net-hm-min.js", function(req, res) {
-  res.sendFile(__dirname, 'public/pixelpaste.net-hm-min.js')
-})
-
 app.get("/register", function(req, res) {
   res.render("register", {
     error: ""
