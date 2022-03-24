@@ -1,4 +1,29 @@
 google.com, pub-3944954862316283, RESELLER, f08c47fec0942fa0
+# lord-media.com Digital Programmatic Advertising Agency
+lord-media.com, 22561025441, DIRECT, f08c47fec0942fa0
+google.com, pub-3812685113410019, RESELLER, f08c47fec0942fa0
+google.com, pub-3812685113410019, DIRECT, f08c47fec0942fa0
+google.com, pub-3547058605891393, RESELLER, f08c47fec0942fa0
+lord-media.com, 22561025441, DIRECT, f08c47fec0942fa0
+google.com, pub-5830701627976708, RESELLER, f08c47fec0942fa0
+google.com, pub-1569289026679616, RESELLER, f08c47fec0942fa0
+google.com, pub-5823433327063800, RESELLER, f08c47fec0942fa0
+google.com, pub-3377995099635986, RESELLER, f08c47fec0942fa0
+google.com, pub-7049643425223583, RESELLER, f08c47fec0942fa0
+lord-media.com, AdX-55297863, DIRECT
+google.com, pub-2610964203515025, DIRECT, f08c47fec0942fa0
+google.com, pub-2393320645055022, RESELLER, f08c47fec0942fa0
+teads.tv, 21034, DIRECT, 15a9c44f6d26cbe1
+indexexchange.com, 183592, RESELLER, 50b1c356f2c5c8fc
+indexexchange.com, 195049, RESELLER, 50b1c356f2c5c8fc
+appnexus.com, 1371, RESELLER, f5ab79cb980f11d1
+stroeer.com, 17580, DIRECT
+adform.com, 2148, RESELLER, 9f5210a2f0999e32
+rubiconproject.com, 22884, DIRECT, 0bfd66d529a55807
+media.net, 8CUGIC7K8, DIRECT
+lord-media.com, 22684701882, DIRECT, f08c47fec0942fa0
+google.com, pub-1849589791548457, RESELLER, f08c47fec0942fa0
+google.com, pub-1422713854272156, RESELLER, f08c47fec0942fa0
 
 #Ad.Plus
 ad.plus, 352349, DIRECT #Video #Display
