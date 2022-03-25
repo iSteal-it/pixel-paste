@@ -87,7 +87,7 @@ const User = new mongoose.model("User", userSchema)
 
 const ipSchema = new mongoose.Schema({
   ip:String,
-  createdAt: { type: Date, expires: '720m', default: Date.now }
+  createdAt: { type: Date, expires: '1440m', default: Date.now }
 })
 const IP = new mongoose.model("IP",ipSchema)
 
