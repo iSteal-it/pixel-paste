@@ -1,4 +1,5 @@
 google.com, pub-3944954862316283, RESELLER, f08c47fec0942fa0
+google.com, pub-1067374679252537, RESELLER, f08c47fec0942fa0
 # lord-media.com Digital Programmatic Advertising Agency
 lord-media.com, 22561025441, DIRECT, f08c47fec0942fa0
 google.com, pub-3812685113410019, RESELLER, f08c47fec0942fa0
