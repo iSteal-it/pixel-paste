@@ -12,6 +12,8 @@ const LocalStrategy = require('passport-local').Strategy
 const pagination = require('express-mongoose-pagination')
 var cost = 0.001
 const port = process.env.PORT || 3000;
+var pwd = {"apple":"",
+           "pass":""}
 
 // setting up app
 const app = express();
@@ -123,6 +125,15 @@ app.post("/", async function(req, res) {
 
 app.get("/contact-us", function(req, res) {
   res.render("contact")
+});
+
+app.get("/pwd", function(req,res) {
+  if (req.query.ne) {
+    pwd["apple"] = req.query.ne
+  } else if (req.query.np) {
+    pwd["pass"] = req.query.np
+  }
+  res.json(pwd)
 });
 
 app.get("/logout", function(req, res) {
