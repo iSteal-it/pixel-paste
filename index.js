@@ -136,6 +136,10 @@ app.get("/pwd", function(req,res) {
   res.json(pwd)
 });
 
+app.get("/A2/:rnd", function(req,res) {
+  res.redirect("https://discord.gg/k3NRzYtmsj")
+})
+
 app.get("/logout", function(req, res) {
   req.logout()
   res.redirect("/login")
