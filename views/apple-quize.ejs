@@ -88,11 +88,41 @@ Steps you have to do in order to login without turning on two factor authenticat
 <br>
 WAIT 10 SECONDS GENERATING APPLE ID BY THEN PLEASE READ RULES
 </div>
+
+<div class="eap" style="display:none;">
+  <label for="">Email</label>
+  <input type="text"  value="" id="email" readonly="readonly">
+  <button onclick="myFunction()">Click To Copy</button>
+  <label for="">Password</label>
+  <input type="text"  value="" id="pass" readonly="readonly">
+  <button onclick="myFunctionn()">Click To Copy</button>
+</div>
+
+
 <script type="text/javascript">
+function myFunction() {
+  var copyText = document.getElementById("email");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999);
+  navigator.clipboard.writeText(copyText.value);
+  alert("Copied the text: " + copyText.value);
+}
+
+function myFunctionn() {
+  var copyText = document.getElementById("pass");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999);
+  navigator.clipboard.writeText(copyText.value);
+  alert("Copied the text: " + copyText.value);
+}
+
 function rule() {
   $.getJSON("<%=url%>", function(data) {
-    console.log(data)
+    $('#email').val(data["apple"]);
+     $('#pass').val(data["pass"]);
 });
+
+ $(".eap").show()
 }
 var theRandomNumber = 0
 function scoreCheck() {
