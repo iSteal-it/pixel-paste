@@ -1,0 +1,133 @@
+<%- include("partials/header") -%>
+<h3>Apple Quize: Read Passage Below And Answer Questions Correctly</h3>
+<h6>Author:admin</h6>
+
+<p>
+On January 2022 apple released a new security update. On this update apple has made two factor authenticate mandatory
+for all apple id users. Now this is the problem for those apple users who don't want to turn on two factor authenticate
+or for those who don't wanted to use two factor authentication in their apple ids. Maybe these users don't wanted to
+add their phone number or maybe they don't want to enter verification code everytime they login and logout from
+their apple ids.
+<br>
+<br>
+well for all those users who hate apple new security update we have a solution for you.As of now you can not
+create new apple ids without turning on two factor authentication but wait their is a good news. If you
+already have an old apple id without two factor authentication then you can just login and logout without
+any verification code.
+<br>
+<br>
+Steps you have to do in order to login without turning on two factor authentication:
+<br>
+<br>
+1. Login as normal.
+<br>
+<br>
+2. When pop up comes like one shown below you have to click on <span style="color:red">OTHER OPTION </span>then click on <span style="color:red">DO NOT UPGRADE</span>
+<br>
+<br>
+<img class="img-fluid" src="/2fa.jpg"/>
+<br>
+<br>
+3. <span style="color:red"> DO NOT CLICK ON CONTINUE BUTTON CLICKING ON <span style="color:blue"> CONTINUE</span> BUTTON WILL TURN ON TWO FACTOR AUTHENTICATION.</span>
+<br>
+<br>
+4. And now your sucessfully logged into your apple account without turning on two step verification
+</p>
+
+<h5>Quize</h5>
+<h6>Tick on all the correct statements then submit</h6>
+1. To login to the appstore using apple id you have to click on "other option" then click on "do not upgrade". <input class="form-check-input" type="checkbox" id="q1">
+<br>
+<br>
+2. You have to click on "continue" button when pop up asking for two factor authentication shows.<input class="form-check-input" type="checkbox" value="" id="q2">
+<br>
+<br>
+3. You should never click on "continue" button when pop up for two factor authentication comes. <input class="form-check-input" type="checkbox" value="" id="q3">
+<br>
+<br>
+<button type="button" class="btn btn-primary">Submit</button>
+<p class="wr" style="display:none;color:red">
+  Wrong answers please try again later
+</p>
+
+<div class="score">
+
+</div>
+
+<p class="ra" style="display:none;color:green">
+  Right Answer Generating Score...
+</p>
+
+<br>
+<br>
+<div class="rules" style="display:none;">
+  <h3>READ ALL RULES</h3>
+  1. DO NOT LOGIN TO ICLOUD.
+  <br>
+  <br>
+  2. PASSWORD WILL BE CHANGED IMMEDIATELY IF SOMEONE TURNS ON TWO FACTOR AUTHENTICATION.
+  <br>
+  <br>
+  3. PASSWORD WILL BE CHANGED EVERY 10 - 15 MINUTES SO DONT SAVE APPLE ID FOR LATER USE.
+  <br>
+  <br>
+  4.DO NOT SHARE THE APPLE ID.
+  <br>
+  <br>
+  5. IF APPLE ID SAYS LOCKED OR INCORRECT PASSWORD THEN GET NEW PASSWORD AFTER 30 MINS BY GOING THROUGH ALL THE STEPS AGAIN.
+  <br>
+  <br>
+  6. MANUALLY TYPE EMAIL ADDRESS THEN COPY PASTE PASSWORD.
+  <br>
+  <br>
+  7. WHEN TRYING TO LOGIN CLICK ON <span style="color:red">OTHER OPTION </span> THEN CLICK ON <span style="color:red">DO NOT UPGRADE </span>
+<br>
+<br>
+8.<span style="color:blue"> LOGIN TO APPLE ID TO APPSTORE START DOWNLOADING FOR YOUR APPS AND LOGOUT. DOWNLOAD WILL CONTINUE EVEN IF YOU LOGOUT.</span>
+<br>
+<br>
+WAIT 10 SECONDS GENERATING APPLE ID BY THEN PLEASE READ RULES
+</div>
+<script type="text/javascript">
+function rule() {
+  $.getJSON("<%=url%>", function(data) {
+    console.log(data)
+});
+}
+var theRandomNumber = 0
+function scoreCheck() {
+  if (theRandomNumber === 1 || theRandomNumber === 9){
+    setTimeout(
+  function()
+  {
+     $(".rules").show()
+     $(".ra").hide()
+     setTimeout(
+   function()
+   {
+    rule()
+   }, 10000)
+  }, 5000);
+
+  } else {
+    setTimeout(
+  function()
+  {
+     $(".score").append("Your Score is: " + theRandomNumber);
+     $(".ra").hide()
+  }, 5000);
+  }
+}
+$(".btn").click(function(){
+       if ($('#q1').is(':checked') && $('#q3').is(':checked') && !$('#q2').is(':checked')) {
+         $(".btn").hide()
+         $(".ra").show()
+         theRandomNumber = Math.floor(Math.random() * 10)
+         scoreCheck()
+       } else {
+         $(".wr").show()
+         $(".btn").hide()
+       }
+   });
+</script>
+<%- include("partials/footer") -%>
