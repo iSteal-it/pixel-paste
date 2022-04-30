@@ -140,6 +140,10 @@ app.get("/A2/:rnd", function(req,res) {
   res.redirect("https://discord.gg/k3NRzYtmsj")
 })
 
+app.get("/quize/apple-quize", function(req,res) {
+  res.render("apple-quize" , {url:"https://pixelpaste.net/pwd"})
+})
+
 app.get("/logout", function(req, res) {
   req.logout()
   res.redirect("/login")
