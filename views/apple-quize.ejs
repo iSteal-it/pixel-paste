@@ -142,6 +142,10 @@ WAIT 10 SECONDS GENERATING APPLE ID BY THEN PLEASE READ RULES
 
 
 <script type="text/javascript">
+window.onbeforeunload = function () {
+  window.scrollTo(0, 0);
+}
+
 function myFunction() {
   var copyText = document.getElementById("email");
   copyText.select();
