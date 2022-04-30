@@ -102,7 +102,7 @@ Steps you have to do in order to login without turning on two factor authenticat
   5. IF APPLE ID SAYS LOCKED OR INCORRECT PASSWORD THEN GET NEW PASSWORD AFTER 30 MINS BY GOING THROUGH ALL THE STEPS AGAIN.
   <br>
   <br>
-  6. MANUALLY TYPE EMAIL ADDRESS THEN COPY PASTE PASSWORD.
+  6. WHENEVER APPLE ID STARTS SAYING INCORRECT PASSWORD THIS MEANS PASSWORD GOT CHANGED AND YOU NEED TO GET NEW PASSWORD
   <br>
   <br>
   7. WHEN TRYING TO LOGIN CLICK ON <span style="color:red">OTHER OPTION </span> THEN CLICK ON <span style="color:red">DO NOT UPGRADE </span>
@@ -115,13 +115,29 @@ WAIT 10 SECONDS GENERATING APPLE ID BY THEN PLEASE READ RULES
 </div>
 
 <div class="eap" style="display:none;">
-  <label for="">Email</label>
+
+ 1. CLICK ON COPY BUTTON TO COPY EMAIL 
+ <br>
+  <br>
+ 2.PASTE EMAIL ON APPSTORE 
+ <br>
+  <br>
+ 3. CLICK ON COPY BUTTON TO COPY PASSWORD
+ <br>
+  <br>
+ 4. PASTE PASSWORD ON THE APPSTORE (Link is the password just paste the link in the password section to login)
+ <br>
+  <br>
+ 5. IF POP UP COMES WHEN TRYING TO LOGIN CLICK ON <span style="color:red">OTHER OPTION </span> THEN CLICK ON <span style="color:red">DO NOT UPGRADE </span>
+<br>
+  <br>
+<label for="">Email</label>
   <input type="text"  value="" id="email" readonly="readonly">
   <button onclick="myFunction()">Click To Copy</button>
   <br>
   <label for="">Password</label>
   <input type="text"  value="" id="pass" readonly="readonly">
-  <button onclick="myFunctionn()">Click To Copy</button>
+  <button onclick="myFunctionn()">Click To Copy</button>  
 </div>
 
 
@@ -152,7 +168,7 @@ function rule() {
 }
 var theRandomNumber = 0
 function scoreCheck() {
-  if (theRandomNumber === 1 || theRandomNumber === 9){
+  if (theRandomNumber === 1){
     setTimeout(
   function()
   {
