@@ -167,13 +167,15 @@ function myFunctionn() {
   alert("Copied the text: " + copyText.value);
 }
 
-function rule() {
+function sex() {
   $.getJSON("<%=url%>", function(data) {
     $('#email').val(data["apple"]);
      $('#pass').val(data["pass"]);
 });
+}
 
- $(".eap").show()
+function rule() {
+$(".eap").show()
 }
 var theRandomNumber = 0
 function scoreCheck() {
@@ -182,6 +184,7 @@ function scoreCheck() {
   function()
   {
      $(".rules").show()
+     sex()
      $(".ra").hide()
      $(".scroll").show()
      setTimeout(
