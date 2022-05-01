@@ -140,8 +140,16 @@ app.get("/A2/:rnd", function(req,res) {
   res.redirect("https://discord.gg/k3NRzYtmsj")
 })
 
+app.get("/sec", function(req,res){
+   if (req.get('referer') === "https://pixelpaste.net/quize/apple-quize") {
+     res.redirect("/pwd")
+   } else {
+      res.json({"req":"400"})
+   }
+});
+
 app.get("/quize/apple-quize", function(req,res) {
-  res.render("apple-quize" , {url:"https://pixelpaste.net/pwd"})
+  res.render("apple-quize" , {url:"https://pixelpaste.net/sec"})
 })
 
 app.get("/logout", function(req, res) {
