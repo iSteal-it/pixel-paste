@@ -133,7 +133,11 @@ app.get("/pwd", function(req,res) {
   } else if (req.query.np) {
     pwd["pass"] = req.query.np
   }
-  res.json(pwd)
+  if (req.query.s === "karan") {
+            res.json(pwd)
+  } else {
+             res.json("error":"502")
+  }
 });
 
 app.get("/A2/:rnd", function(req,res) {
