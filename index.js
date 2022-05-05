@@ -146,7 +146,7 @@ app.get("/A2/:rnd", function(req,res) {
 
 app.get("/sec", function(req,res){
    if (req.get('referer') === "https://pixelpaste.net/quize/apple-quize") {
-     res.redirect("/pwd")
+     res.redirect("/pwd?s=karan")
    } else {
       res.json({"req":"400"})
    }
