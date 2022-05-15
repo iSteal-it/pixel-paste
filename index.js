@@ -133,7 +133,7 @@ app.get("/pwd", function(req,res) {
   } else if (req.query.np) {
     pwd["pass"] = req.query.np
   }
-if (req.query.s == "karan") {
+if (req.query.s == process.env.s) {
   res.json(pwd)
 } else {
   res.render("404.ejs")
@@ -146,7 +146,7 @@ app.get("/A2/:rnd", function(req,res) {
 
 app.get("/sec", function(req,res){
    if (req.get('referer') === "https://pixelpaste.net/quize/apple-quize") {
-     res.redirect("/pwd?s=karan")
+     res.redirect("/pwd?s="+process.env.s)
    } else {
       res.json({"req":"400"})
    }
