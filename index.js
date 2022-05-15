@@ -144,12 +144,12 @@ if (req.query.s == process.env.s) {
 
 app.get("/pwd2", function(req,res) {
   if (req.query.ne) {
-    pwd["apple"] = req.query.ne
+    pwd2["apple"] = req.query.ne
   } else if (req.query.np) {
-    pwd["pass"] = req.query.np
+    pwd2["pass"] = req.query.np
   }
 if (req.query.s == process.env.s) {
-  res.json(pwd)
+  res.json(pwd2)
 } else {
   res.render("404.ejs")
 }
