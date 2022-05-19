@@ -3,6 +3,32 @@
 <div class="footer">
   <p>it is supposed to be a minimalistic website so we don't have a footer 😞 </p>
 </div>
+<div class="overlay">
+<h2 class="overlay-text">Please Turn Off AD Blocker And Refresh This Page</h2>
+<br>
+<h3 class="overlay-text">We Need Money 👉🏻👈🏻</h3>
+</div>
+<script type="text/javascript">
+checkAdBlocker();
+
+function checkAdBlocker() {
+    try {
+        fetch(
+            new Request("https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js", {
+                method: 'HEAD',
+                mode: 'no-cors'
+            })).catch(error => {
+            warn()
+        });
+    } catch (e) {
+        warn()
+    }
+}
+
+function warn() {
+    $(".overlay").css("visibility", "visible");
+}
+</script>
 <script type="text/javascript">
   window._taboola = window._taboola || [];
   _taboola.push({flush: true});
