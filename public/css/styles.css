@@ -217,3 +217,10 @@ label {
 	padding-top: 30%;
   visibility: hidden;
 }
+
+.qb {
+    display: inline-block;
+    padding: 1px 8px;
+    height: 100%;
+    line-height: 100%;
+}
