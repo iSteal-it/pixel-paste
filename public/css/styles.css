@@ -1,3 +1,9 @@
+@import 'https://fonts.googleapis.com/css2?family=Open+Sans';
+
+* {
+  font-family:  'Open Sans', sans-serif;
+}
+
 .footer-padding {
 	padding-bottom: 60px;
 }
@@ -20,28 +26,18 @@ html {
   position: relative;
 }
 
-#dropdown {
-  position:absolute;
-  top:0;
-  left:0;
-	padding: 5%;
-}
 
 ul {
 	list-style: none;
 }
 .container {
-	margin-top: 15%;
+	margin-top: 5%;
 	padding-left: 5%;
 	padding-right:5%;
 }
 
 hr {
  border-top:1px dotted #000;
-}
-
-li {
-	text-align: left;
 }
 
 input {
@@ -60,39 +56,6 @@ a:hover {
 	color:black;
 }
 
-
-
-.mtooltip{
-  position: relative;
-  display: inline-block;
-}
-
-.mtooltip .mtooltiptext {
-  visibility: hidden;
-  width: 120px;
-  background-color: black;
-  color: #fff;
-  text-align: left;
-  padding: 5px 0;
-  border-radius: 6px;
-  position: absolute;
-  z-index: 1;
-	top: -5px;
-  left: 175%;
-}
-
-.mtooltip:hover .mtooltiptext {
-  visibility: visible;
-}
-
-.ma {
-	color: white;
-}
-
-.ma:hover {
-	color:gray;
-}
-
 .postt {
 	white-space: pre-wrap;
   word-break: break-word;
@@ -100,7 +63,6 @@ a:hover {
 
 
 label {
-  font-family: "Raleway", sans-serif;
   font-size: 11pt;
 }
 
@@ -119,14 +81,12 @@ label {
   padding: 12px 44px;
 }
 #card-title {
-  font-family: "Raleway Thin", sans-serif;
   letter-spacing: 4px;
   padding-bottom: 23px;
   padding-top: 13px;
   text-align: center;
 }
 #signup {
-  font-family: "Raleway", sans-serif;
   font-size: 10pt;
   margin-top: 16px;
   text-align: center;
@@ -136,7 +96,6 @@ label {
 
   cursor: pointer;
   color: white;
-  font-family: "Raleway SemiBold", sans-serif;
   height: 42.3px;
   margin: 0 auto;
   margin-top: 50px;
@@ -147,7 +106,6 @@ label {
 .btn {
   cursor: pointer;
   color: white;
-  font-family: "Raleway SemiBold", sans-serif;
   height: 42.3px;
   margin: 0 auto;
   transition: 0.25s;
@@ -203,6 +161,7 @@ label {
 .score {
 	color: blue;
 }
+
 .overlay {
 	position:absolute;
 	top:0;
@@ -219,8 +178,200 @@ label {
 }
 
 .qb {
-    display: inline-block;
+	display: inline-block;
     padding: 1px 8px;
     height: 100%;
     line-height: 100%;
+}
+
+.header {
+  width: 80%;
+}
+
+.link-arrow:after {
+  content: '';
+  background-size: 100% 100%;
+  width: 16px;
+  height: 12px;
+  position: absolute;
+  top: 5px;
+  right: -28px;
+  -webkit-transition: all .4s cubic-bezier(.35, 1, .33, 1);
+  transition: all .4s cubic-bezier(.35, 1, .33, 1)
+}
+
+.link-arrow:hover:after {
+  right: -35px
+}
+
+.link-arrow.link-arrow-white:after {
+  background-size: 100% 100%
+}
+
+.link-arrow-hover:after {
+  right: -35px
+}
+
+.link {
+  display: inline-block;
+  position: relative;
+  border: none;
+  padding-bottom: 4px;
+  text-transform: uppercase;
+  font-weight: 700
+}
+
+.link:active,
+.link:focus,
+.link:hover {
+  outline: 0
+}
+
+.link:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  background: #000;
+  width: 0;
+  height: 2px;
+  -webkit-transition: all .4s cubic-bezier(.35, 1, .33, 1);
+  transition: all .4s cubic-bezier(.35, 1, .33, 1)
+}
+
+.link:hover {
+  color: #000
+}
+
+.link:hover:before {
+  width: 100%
+}
+
+.link-theme:before {
+  background: gray
+}
+
+
+
+.header {
+	top: 0;
+	width: 100%;
+	padding-bottom: 7%;
+	background: transparent;
+}
+
+.header ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.header li a {
+  display: block;
+  padding: 20px 20px 4px 20px;
+  text-decoration: none;
+}
+
+.header li a:hover,
+.header .menu-btn:hover {
+  background-color: #fff;
+}
+
+.header .logo {
+  color: black;
+  display: block;
+  float: left;
+  font-size: 2em;
+  padding: 2px 0px;
+  text-decoration: none;
+}
+
+
+.header .menu {
+  clear: both;
+  max-height: 0;
+  transition: max-height .2s ease-out;
+}
+
+
+.header .menu-icon {
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+  padding: 28px 20px;
+  position: relative;
+  user-select: none;
+}
+
+.header .menu-icon .navicon {
+  background: #333;
+  display: block;
+  height: 2px;
+  position: relative;
+  transition: background .2s ease-out;
+  width: 18px;
+}
+
+.header .menu-icon .navicon:before,
+.header .menu-icon .navicon:after {
+  background: #333;
+  content: '';
+  display: block;
+  height: 100%;
+  position: absolute;
+  transition: all .2s ease-out;
+  width: 100%;
+}
+
+.header .menu-icon .navicon:before {
+  top: 5px;
+}
+
+.header .menu-icon .navicon:after {
+  top: -5px;
+}
+
+.header .menu-btn {
+  display: none;
+}
+
+.header .menu-btn:checked ~ .menu {
+  max-height: 290px;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon {
+  background: transparent;
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:before {
+  transform: rotate(-45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon .navicon:after {
+  transform: rotate(45deg);
+}
+
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:before,
+.header .menu-btn:checked ~ .menu-icon:not(.steps) .navicon:after {
+  top: 0;
+}
+
+@media (min-width: 875px) {
+  .header li {
+    float: left;
+  }
+  .header li a {
+    padding: 20px 0px 0px 0px;
+    margin-left: 30px;
+  }
+  .header .menu {
+    clear: none;
+    float: right;
+    max-height: none;
+  }
+  .header .menu-icon {
+    display: none;
+  }
 }
