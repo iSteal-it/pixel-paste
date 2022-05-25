@@ -11,9 +11,6 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
   <link rel="stylesheet" href="/css/styles.css">
   <link rel="icon" type="image/svg+xml" href="https://art.pixilart.com/10b360b87b0087d.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100;400;600&display=swap" rel="stylesheet">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4658358621108372"
      crossorigin="anonymous"></script>
@@ -48,39 +45,28 @@
 
 <body>
 
-<nav id="dropdown">
-  <div class="mtooltip">
-<p><i class="fas fa-square fa-lg"></i></p>
-<span class="mtooltiptext">
-<ul>
-  <a class="ma" href="/"><li><i class="fas fa-home"></i> home</li></a>
-  <a class="ma"href="/compose"><li><i class="dot fas fa-feather-alt"></i> write</li></a>
-  <% if (login) {%>
-  <a class="ma"href="/author"><li><i class="fas fa-user-circle"></i> profile</li></a>
-   <a class="ma"href="/earnings"><li><i class="fas fa-dollar-sign"></i> earnings</li></a>
-  <a class="ma"href="/logout"><li><i class="fas fa-sign-out-alt"></i> logout</li></a>
-  <a class="ma"href="/contact-us"><li><i class="fas fa-envelope"></i> contact</li></a>
-  <%} else {%>
-  <a class="ma"href="/login"><li><i class="fas fa-sign-in-alt"></i> login</li></a>
-  <a class="ma"href="/register"><li><i class="fas fa-user-plus"></i> register</li></a>
-  <a class="ma"href="/contact-us"><li><i class="fas fa-envelope"></i> contact</li></a>
-  <a class="ma"href="/privacy-policy"><li><i class="fas fa-info-circle"></i> policy</li></a>
-  <%}%>
-
-
-</ul>
-</span>
-  </div>
-
-</nav>
-
 <script type="text/javascript">
   document.addEventListener("touchstart", function() {}, true);
-
-  $('.mtooltip').click(function() {
-    $(".mtooltiptext").toggle().css(  "visibility", "visible");
-});
 </script>
   <div class="container">
   
-  
+  <header class="header">
+          <a class="logo" href="/">PixelPaste</a>
+          <input class="menu-btn" type="checkbox" id="menu-btn" />
+          <label class="menu-icon" for="menu-btn"><span class="navicon"></span></label>
+          <ul class="menu">
+          <li><a class="link link-theme link-arrow" href="/"><i class="fas fa-home"></i> home</a></li>
+       <li><a class="link link-theme link-arrow" href="/compose"><i class="fas fa-feather-alt"></i> write</a></li>
+       <% if (login) {%>
+       <li><a class="link link-theme link-arrow"href="/author"><i class="fas fa-user-circle"></i> profile</a></li>
+        <li><a class="link link-theme link-arrow"href="/earnings"><i class="fas fa-dollar-sign"></i> earnings</a></li>
+       <li><a class="link link-theme link-arrow"href="/logout"><i class="fas fa-sign-out-alt"></i> logout</a></li>
+       <li><a class="link link-theme link-arrow"href="/contact-us"><i class="fas fa-envelope"></i> contact</a></li>
+       <%} else {%>
+       <li><a class="link link-theme link-arrow"href="/login"><i class="fas fa-sign-in-alt"></i> login</a></li>
+       <li><a class="link link-theme link-arrow"href="/register"><i class="fas fa-user-plus"></i> register</a></li>
+       <li><a class="link link-theme link-arrow"href="/contact-us"><i class="fas fa-envelope"></i> contact</a></li>
+       <li><a class="link link-theme link-arrow"href="/privacy-policy"><i class="fas fa-info-circle"></i> policy</a></li>
+       <%}%>
+          </ul>
+        </header>
