@@ -29,6 +29,11 @@ var pwd7 = {"apple":"",
 var pwd8 = {"apple":"",
            "pass":""}
 
+process.on('uncaughtException', function (err) {
+  console.error(err);
+  console.log("Node NOT Exiting...");
+});
+
 // setting up app
 const app = express();
 app.set("view engine", "ejs");
