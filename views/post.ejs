@@ -50,7 +50,7 @@ $('#content').ready(function(){
     $('.postt').each(function(){
         var str = $(this).html();
         var regex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
-        var replaced_text = str.replace(regex, "<a class='clk' href='$1' target='_blank'>$1</a>");
+        var replaced_text = str.replace(regex, "<a class='clk' href='https://pixelpaste.net/redirection?link=$1' target='_blank'>$1</a>");
         $(this).html(replaced_text);
     });
 });
