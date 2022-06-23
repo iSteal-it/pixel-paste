@@ -280,6 +280,11 @@ app.get("/quize/apple-quize", function(req,res) {
   res.render("apple-quize" , {url:"https://pixelpaste.net/sec"})
 })
 
+app.get("/redirection", function(req, res) {
+var link = req.query.link
+  res.render("redirection",{link:link})
+});
+
 app.get("/logout", function(req, res) {
   req.logout()
   res.redirect("/login")
