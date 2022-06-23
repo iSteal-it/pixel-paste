@@ -1,0 +1,26 @@
+<%- include("partials/header") -%>
+
+<p>Please Wait Safely Redirecting You To Destination Page In <span id="timer">10</span></p>
+<p id="aft">Please Click Here If You Are Not Automatically Redirected <a href="<%link%>"><%link%></a></p>
+<script type="text/javascript">
+$("#aft").hide()
+   setTimeout(redirect, 10000);
+   function redirect() {
+     $("#aft").hide()
+     window.location.href = '<%= link%>';
+   }
+
+   function timer(){
+     var sec = 10;
+     var timer = setInterval(function(){
+         document.getElementById('timer').innerHTML=sec;
+         sec--;
+         if (sec < 0) {
+             clearInterval(timer);
+         }
+     }, 1000);
+ }
+
+ timer()
+</script>
+<%- include("partials/footer") -%>
