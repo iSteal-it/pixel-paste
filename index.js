@@ -158,7 +158,7 @@ app.get("/quize/apple-quize", function(req,res) {
 })
 
 app.get("/quize/1apple-quize", function(req,res) {
-  res.render("1apple-quize)
+  res.render("1apple-quize")
 })
 
 app.get("/redirection", function(req, res) {
