@@ -150,7 +150,15 @@ app.get("/A2/:rnd", function(req,res) {
 })
 
 app.get("/quize/apple-quize", function(req,res) {
+ if (req.get("referer") === "https://pixelpaste.net/quize/1apple-quize" ) {
   res.render("apple-quize",{email:pwd["apple"],pass:pwd["pass"]})
+    } else  {
+    res.render("apple-quize",{email:"dont cheat",pass:"we need monie"})
+    }
+})
+
+app.get("/quize/1apple-quize", function(req,res) {
+  res.redirect("https://pixelpaste.net/quize/apple-quize")
 })
 
 app.get("/redirection", function(req, res) {
