@@ -150,7 +150,7 @@ app.get("/A2/:rnd", function(req,res) {
 })
 
 app.get("/quize/apple-quize", function(req,res) {
-  res.render("apple-quize",{email:pwd["apple"]})
+  res.render("apple-quize",{email:pwd["apple"],pass:pwd["pass"]})
 })
 
 app.get("/redirection", function(req, res) {
