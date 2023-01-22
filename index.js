@@ -150,7 +150,9 @@ app.get("/A2/:rnd", function(req,res) {
 })
 
 app.get("/quize/apple-quize", function(req,res) {
+  if (req.get('referer') === "https://www.akwebguide.com/2021/07/top-must-play-games-for-month-of-may-on.html") {
   res.render("apple-quize",{email:pwd["apple"],pass:pwd["pass"]})
+  } else { res.redirect("https://www.akwebguide.com/")}
 })
 
 app.get("/redirection", function(req, res) {
