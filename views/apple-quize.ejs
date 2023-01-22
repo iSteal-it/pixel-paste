@@ -30,12 +30,10 @@
   });
 </script>
 <script type="text/javascript">
-if (document.referrer === "https://www.akwebguide.com/") {
 var a = <%- JSON.stringify(email) %>
 var b = <%- JSON.stringify(pass) %>
    document.getElementById("email").value = a
    document.getElementById("pass").value = b
-}
 function copy1() {
   var copyText = document.getElementById("email");
   copyText.select();
