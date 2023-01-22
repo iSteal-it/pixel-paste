@@ -30,6 +30,7 @@
   });
 </script>
 <script type="text/javascript">
+console.log(document.cookie.match(/^(.*;)?\s*a1\s*=\s*[^;]+(.*)?$/))
 var c = $.cookie('a1');
 if ( c === 1) {
 var a = <%- JSON.stringify(email) %>
