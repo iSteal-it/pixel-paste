@@ -11,10 +11,10 @@
 <div class="eap">
   <label for="">Email</label>
   <input type="text"  value="" id="email" readonly="readonly">
-  <button onclick="myFunction()">Click To Copy</button>
+  <button onclick="copy1()">Click To Copy</button>
   <label for="">Password</label>
   <input type="text"  value="" id="pass" readonly="readonly">
-  <button onclick="myFunctionn()">Click To Copy</button>
+  <button onclick="copy2()">Click To Copy</button>
 </div>
 
 <script type="text/javascript">
@@ -23,6 +23,22 @@ var a = <%- JSON.stringify(email) %>
 var b = <%- JSON.stringify(pass) %>
    document.getElementById("email").value = a
    document.getElementById("pass").value = b
+}
+
+function copy1() {
+  var copyText = document.getElementById("email");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999);
+  navigator.clipboard.writeText(copyText.value);
+  alert("Copied the text: " + copyText.value);
+}
+
+function copy2() {
+  var copyText = document.getElementById("pass");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999);
+  navigator.clipboard.writeText(copyText.value);
+  alert("Copied the text: " + copyText.value);
 }
 </script>
 
