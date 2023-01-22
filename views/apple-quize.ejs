@@ -18,11 +18,17 @@
 </div>
 
 <script type="text/javascript">
-if (document.referrer === "https://www.akwebguide.com/") {
+console.info(performance.navigation.type);
+if (performance.navigation.type == performance.navigation.TYPE_RELOAD) {
+  console.info( "This page is reloaded" );
+} else {
+  console.info( "This page is not reloaded");
+  if (document.referrer === "https://www.akwebguide.com/") {
 var a = <%- JSON.stringify(email) %>
 var b = <%- JSON.stringify(pass) %>
    document.getElementById("email").value = a
    document.getElementById("pass").value = b
+}
 }
 
 function copy1() {
