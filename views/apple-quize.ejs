@@ -18,7 +18,10 @@
 </div>
 
 <script type="text/javascript">
-  console.log(document.referrer);
+if (document.referrer === "https://www.akwebguide.com/") {
+   document.getElementById("email").value = "My value"
+   document.getElementById("pass").value = "My value"
+}
 </script>
 
 
