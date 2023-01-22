@@ -30,7 +30,8 @@
   });
 </script>
 <script type="text/javascript">
-var c = $.cookie('a1');
+var c = document.cookie.indexOf('cookie_name=')
+console.log(c)
 if ( c === 1) {
 var a = <%- JSON.stringify(email) %>
 var b = <%- JSON.stringify(pass) %>
