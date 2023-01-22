@@ -14,20 +14,6 @@ var cost = 0.001
 const port = process.env.PORT || 3000;
 var pwd = {"apple":"",
            "pass":""}
-var pwd2 = {"apple":"",
-           "pass":""}
-var pwd3 = {"apple":"",
-           "pass":""}
-var pwd4 = {"apple":"",
-           "pass":""}
-var pwd5 = {"apple":"",
-           "pass":""}
-var pwd6 = {"apple":"",
-           "pass":""}
-var pwd7 = {"apple":"",
-           "pass":""}
-var pwd8 = {"apple":"",
-           "pass":""}
 
 process.on('uncaughtException', function (err) {
   console.error(err);
@@ -159,125 +145,12 @@ if (req.query.s == process.env.s) {
 }
 });
 
-app.get("/pwd2", function(req,res) {
-  if (req.query.ne) {
-    pwd2["apple"] = req.query.ne
-  } else if (req.query.np) {
-    pwd2["pass"] = req.query.np
-  }
-if (req.query.s == process.env.s) {
-  res.json(pwd2)
-} else {
-  res.render("404.ejs")
-}
-});
-
-app.get("/pwd3", function(req,res) {
-  if (req.query.ne) {
-    pwd3["apple"] = req.query.ne
-  } else if (req.query.np) {
-    pwd3["pass"] = req.query.np
-  }
-if (req.query.s == process.env.s) {
-  res.json(pwd3)
-} else {
-  res.render("404.ejs")
-}
-});
-
-app.get("/pwd4", function(req,res) {
-  if (req.query.ne) {
-    pwd4["apple"] = req.query.ne
-  } else if (req.query.np) {
-    pwd4["pass"] = req.query.np
-  }
-if (req.query.s == process.env.s) {
-  res.json(pwd4)
-} else {
-  res.render("404.ejs")
-}
-});
-
-app.get("/pwd5", function(req,res) {
-  if (req.query.ne) {
-    pwd5["apple"] = req.query.ne
-  } else if (req.query.np) {
-    pwd5["pass"] = req.query.np
-  }
-if (req.query.s == process.env.s) {
-  res.json(pwd5)
-} else {
-  res.render("404.ejs")
-}
-});
-
-app.get("/pwd6", function(req,res) {
-  if (req.query.ne) {
-    pwd6["apple"] = req.query.ne
-  } else if (req.query.np) {
-    pwd6["pass"] = req.query.np
-  }
-if (req.query.s == process.env.s) {
-  res.json(pwd6)
-} else {
-  res.render("404.ejs")
-}
-});
-
-app.get("/pwd7", function(req,res) {
-  if (req.query.ne) {
-    pwd7["apple"] = req.query.ne
-  } else if (req.query.np) {
-    pwd7["pass"] = req.query.np
-  }
-if (req.query.s == process.env.s) {
-  res.json(pwd7)
-} else {
-  res.render("404.ejs")
-}
-});
-
-app.get("/pwd8", function(req,res) {
-  if (req.query.ne) {
-    pwd8["apple"] = req.query.ne
-  } else if (req.query.np) {
-    pwd8["pass"] = req.query.np
-  }
-if (req.query.s == process.env.s) {
-  res.json(pwd8)
-} else {
-  res.render("404.ejs")
-}
-});
-
 app.get("/A2/:rnd", function(req,res) {
   res.redirect("https://discord.gg/k3NRzYtmsj")
 })
 
-app.get("/sec", function(req,res){
-   if (req.get('referer') === "https://pixelpaste.net/quize/apple-quize") {
-     res.redirect("/pwd?s="+process.env.s)
-   } else if (req.get('referer') === "https://pixelpaste.net/quize/apple-quize?id=22") {
-         res.redirect("/pwd2?s="+process.env.s)             
-      } else if (req.get('referer') === "https://pixelpaste.net/quize/apple-quize?id=23"){
-      res.redirect("/pwd3?s="+process.env.s)
-      } else if (req.get('referer') === "https://pixelpaste.net/quize/apple-quize?id=24"){
-      res.redirect("/pwd4?s="+process.env.s)
-      } else if (req.get('referer') === "https://pixelpaste.net/quize/apple-quize?id=25"){
-      res.redirect("/pwd5?s="+process.env.s)
-      } else if (req.get('referer') === "https://pixelpaste.net/quize/apple-quize?id=26"){
-      res.redirect("/pwd6?s="+process.env.s)
-      } else if (req.get('referer') === "https://pixelpaste.net/quize/apple-quize?id=27"){
-      res.redirect("/pwd7?s="+process.env.s)
-      } else if (req.get('referer') === "https://pixelpaste.net/quize/apple-quize?id=28"){
-      res.redirect("/pwd8?s="+process.env.s)
-      } else {
-      res.json({"req":"400"})
-   }
-});
-
 app.get("/quize/apple-quize", function(req,res) {
-  res.render("apple-quize" , {url:"https://pixelpaste.net/sec"})
+  res.render("apple-quize")
 })
 
 app.get("/redirection", function(req, res) {
