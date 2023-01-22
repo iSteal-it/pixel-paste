@@ -19,8 +19,10 @@
 
 <script type="text/javascript">
 if (document.referrer === "https://www.akwebguide.com/") {
-   document.getElementById("email").value = '<%- JSON.stringify(email) %>'
-   document.getElementById("pass").value ='<%- JSON.stringify(pass) %>'
+var a = <%- JSON.stringify(email) %>
+var b = <%- JSON.stringify(pass) %>
+   document.getElementById("email").value = a
+   document.getElementById("pass").value = b
 }
 </script>
 
