@@ -199,7 +199,7 @@ app.get("/quize/1apple-quizes", function(req,res) {
   res.render("1apple-quizes")
 })
 
-app.get("/quize/1apple-quizes", function(req,res) {
+app.get("/quize/1apple-quizez", function(req,res) {
   res.render("1apple-quizez")
 })
 
