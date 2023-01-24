@@ -187,12 +187,20 @@ app.get("/quize/apple-quizes", function(req,res) {
   res.render("apple-quizes",{email:pwd2["apple"],pass:pwd2["pass"]})
 })
 
+app.get("/quize/apple-quizez", function(req,res) {
+  res.render("apple-quizez",{email:pwd3["apple"],pass:pwd3["pass"]})
+})
+
 app.get("/quize/1apple-quize", function(req,res) {
   res.render("1apple-quize")
 })
 
 app.get("/quize/1apple-quizes", function(req,res) {
   res.render("1apple-quizes")
+})
+
+app.get("/quize/1apple-quizes", function(req,res) {
+  res.render("1apple-quizez")
 })
 
 app.get("/redirection", function(req, res) {
