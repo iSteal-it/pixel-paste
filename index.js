@@ -227,6 +227,10 @@ app.get("/quize/apple-quizeq", function(req,res) {
   res.render("apple-quizeq",{email:pwd4["apple"],pass:pwd4["pass"]})
 })
 
+app.get("/quize/apple-quizem", function(req,res) {
+  res.render("apple-quizem",{email:pwd5["apple"],pass:pwd5["pass"]})
+})
+
 app.get("/quize/1apple-quize", function(req,res) {
   res.render("1apple-quize")
 })
@@ -241,6 +245,10 @@ app.get("/quize/1apple-quizez", function(req,res) {
 
 app.get("/quize/1apple-quizeq", function(req,res) {
   res.render("1apple-quizeq")
+})
+
+app.get("/quize/1apple-quizem", function(req,res) {
+  res.render("1apple-quizem")
 })
 
 app.get("/redirection", function(req, res) {
