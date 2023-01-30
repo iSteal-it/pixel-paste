@@ -304,7 +304,7 @@ app.get("/quize/apple-quizeb", function(req,res) {
 })
 
 app.get("/quize/apple-quizec", function(req,res) {
-  res.render("apple-quizec",{email:pwd7["apple"],pass:pwd7["pass"]})
+  res.render("apple-quizec",{email:pwd8["apple"],pass:pwd8["pass"]})
 })
 
 app.get("/quize/1apple-quize", function(req,res) {
