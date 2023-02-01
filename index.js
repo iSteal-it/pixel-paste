@@ -307,6 +307,10 @@ app.get("/quize/apple-quizec", function(req,res) {
   res.render("apple-quizec",{email:pwd8["apple"],pass:pwd8["pass"]})
 })
 
+app.get("/quize/apple-quizei", function(req,res) {
+  res.render("apple-quizei",{email:pwd9["apple"],pass:pwd9["pass"]})
+})
+
 app.get("/quize/1apple-quize", function(req,res) {
   res.render("1apple-quize")
 })
@@ -337,6 +341,10 @@ app.get("/quize/1apple-quizeb", function(req,res) {
 
 app.get("/quize/1apple-quizec", function(req,res) {
   res.render("1apple-quizec")
+})
+
+app.get("/quize/1apple-quizei", function(req,res) {
+  res.render("1apple-quizei")
 })
 
 app.get("/redirection", function(req, res) {
