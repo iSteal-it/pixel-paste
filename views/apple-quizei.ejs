@@ -1,0 +1,60 @@
+<%- include("partials/header") -%>
+
+<script src='//tags.orquideassp.com/tag/12383'></script>
+<h3>Read instructions below carefully</h3>
+<br>
+<h5>1. If id is locked or not working then report on discord server or retry after 8 hours. ID refresh every 8 hours.</h5>
+<h5>2. Do not login to icloud.</h5>
+<h5>3. Apple Id password or email changes so get new one everytime and use apple id fast.</h5>
+<h5>4. Do not share apple id with anyone.</h5>
+<h5>5. If dont work then join discord server and message enderman for help discord link https://discord.com/invite/k3NRzYtmsj </h5>
+
+<script src='//tags.orquideassp.com/tag/12380'></script>
+<div class="eap">
+  <label for="">Email</label>
+  <input type="text"  value="" id="email" readonly="readonly">
+  <button onclick="copy1()">Click To Copy</button>
+  <script src='//tags.orquideassp.com/tag/12382'></script>
+  <label for="">Password</label>
+  <input type="text"  value="" id="pass" readonly="readonly">
+  <button onclick="copy2()">Click To Copy</button>
+</div>
+<div id="taboola-below-article-thumbnails-new"></div>
+<script type="text/javascript">
+  window._taboola = window._taboola || [];
+  _taboola.push({
+    mode: 'thumbnails-a1',
+    container: 'taboola-below-article-thumbnails-new',
+    placement: 'Below Article Thumbnails New',
+    target_type: 'mix'
+  });
+</script>
+<script type="text/javascript">
+var c = document.cookie.indexOf('i1=')
+console.log(c)
+if ( c !== -1) {
+var a = <%- JSON.stringify(email) %>
+var b = <%- JSON.stringify(pass) %>
+   document.getElementById("email").value = a
+   document.getElementById("pass").value = b
+} else {
+window.location.href = "https://www.akwebguide.com/2021/11/revisiting-some-old-games-we-love.html"
+}
+function copy1() {
+  var copyText = document.getElementById("email");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999);
+  navigator.clipboard.writeText(copyText.value);
+  alert("Copied the text: " + copyText.value);
+}
+function copy2() {
+  var copyText = document.getElementById("pass");
+  copyText.select();
+  copyText.setSelectionRange(0, 99999);
+  navigator.clipboard.writeText(copyText.value);
+  alert("Copied the text: " + copyText.value);
+}
+</script>
+
+
+<%- include("partials/footer") -%>
